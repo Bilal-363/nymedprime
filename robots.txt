@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nymedprime.pages.dev/sitemap.xml
