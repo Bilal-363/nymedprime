@@ -3095,3 +3095,112 @@ footer.ftr {
 @media (max-width: 900px), (max-aspect-ratio: 11/10) {
   .book-media h2 { font-size: calc(31 * var(--h)); }
 }
+
+/* ==========================================================================
+   HERO v3 (desktop only) — video becomes a right-hand panel
+   A full-height column can only ever show ~68% of a 16:9 frame, and the two
+   people span ~85% of it, so one of them was always cut or buried under the
+   headline. A 16:9 panel shows 100% of the frame, so both read clearly, and
+   the left half is freed for the type on clean ground.
+   Scoped to >=901px: the mobile treatment is untouched.
+   ========================================================================== */
+@media (min-width: 901px) {
+  .hero { overflow: visible; }
+
+  .hero-img {
+    position: absolute;
+    right: 0;
+    left: auto;
+    top: 50%;
+    translate: 0 -50%;
+    width: 62%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 20px 0 0 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    /* keep the existing scroll parallax, just without the old full-bleed scale */
+    transform: translate3d(0, var(--hero-img-y), 0) scale(var(--hero-img-s));
+    transform-origin: right center;
+    z-index: 0;
+  }
+
+  /* the whole frame, unrotated and uncropped */
+  .hero-img .hero-poster,
+  .hero-img .hero-plate {
+    transform: none;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+
+  /* a soft fade on the panel's left edge so it sits on the page rather than
+     reading as a pasted-on box, plus a light wash where the lede can reach it */
+  .hero-img::after {
+    background:
+      linear-gradient(90deg,
+        var(--void) 0%,
+        rgba(251,250,247,.72) 12%,
+        rgba(251,250,247,.20) 26%,
+        rgba(251,250,247,0) 44%);
+  }
+
+  /* the type now owns clean ground on the left. Sized so the accent line
+     "Guided Start to Finish" stays on one line in the narrower column:
+     22 chars x ~0.55em x 56px = ~677px against a ~700px column. */
+  .hero-txt { max-width: 47%; position: relative; z-index: 2; }
+  .hero-txt h1 { max-width: none; font-size: min(calc(56 * var(--h)), 9vw); }
+  .hero-txt .lead { max-width: calc(500 * var(--h)); }
+
+  /* the eyebrow is back on plain page colour, so the accent reads again */
+  .hero .eyebrow { color: var(--accent); }
+}
+
+/* a little more room for the type at mid widths */
+@media (min-width: 901px) and (max-width: 1250px) {
+  .hero-img { width: 56%; }
+  .hero-txt { max-width: 46%; }
+}
+
+/* ==========================================================================
+   HERO CTAs ON SMALL SCREENS
+   The two buttons sit in a flex row and cannot shrink, so they set the
+   min-content width of .hero-txt. Measured at 390px: .hero-txt resolved to
+   435px inside 354px of available space, and .hero{overflow:hidden} clipped
+   the headline, lede and the second button rather than scrolling — which is
+   why a scrollWidth check reported no overflow. It fit at 512px, so wider
+   test viewports hid it.
+   Below 560px they stack full width, which also gives proper tap targets.
+   ========================================================================== */
+@media (max-width: 560px) {
+  .hero-txt { width: 100%; max-width: 100%; min-width: 0; }
+  .hero .actions { flex-wrap: wrap; width: 100%; gap: calc(12 * var(--h)); }
+  .hero .actions .pill,
+  .hero .actions .ghost {
+    flex: 1 1 100%;
+    justify-content: center;
+    text-align: center;
+    min-height: 48px;
+  }
+}
+
+/* ==========================================================================
+   CHECKLIST ROWS ON SMALL SCREENS
+   Each row is [name][dashed leader][note] in a flex line. Neither text can
+   shrink, so at 390px the rows measured up to 433px inside a 254px panel and
+   were clipped. The dashed leader only makes sense when name and note sit on
+   one line, so below 560px the row stacks and the leader is dropped.
+   ========================================================================== */
+@media (max-width: 560px) {
+  .chk li {
+    display: block;
+    padding-block: calc(12 * var(--h));
+  }
+  .chk .nm { display: block; max-width: 100%; }
+  .chk .dots { display: none; }
+  .chk .nt {
+    display: block;
+    max-width: 100%;
+    text-align: left;
+    margin-top: calc(4 * var(--h));
+  }
+}
