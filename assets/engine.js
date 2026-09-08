@@ -437,7 +437,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const textEls = document.querySelectorAll('.status-pill span:last-child, .band-p2 .status-val');
 
     try {
-      const HOURS = { 1: [9, 17], 2: [9, 17], 3: [9, 17], 4: [9, 17], 5: [9, 17], 6: [10, 14], 0: null };
+      // Mon-Fri only. Saturday was dropped when the practice hours changed.
+      const HOURS = { 1: [9, 17], 2: [9, 17], 3: [9, 17], 4: [9, 17], 5: [9, 17], 6: null, 0: null };
+      const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const fmtHour = h => (h % 12 || 12) + ':00 ' + (h < 12 ? 'AM' : 'PM');
       const nyc = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
       const day = nyc.getDay();
       const span = HOURS[day];
@@ -448,7 +451,19 @@ document.addEventListener('DOMContentLoaded', () => {
         d.className = isOpen ? 'pulse-dot is-open' : 'pulse-dot';
       });
 
-      const msg = isOpen ? 'Open now — closes 5:00 PM' : 'Closed — opens ' + (day === 6 || day === 0 ? 'Mon 9:00 AM' : 'tomorrow 9:00 AM');
+      // Derive the next opening rather than assuming "tomorrow": on a Friday
+      // evening the next open day is Monday, not Saturday.
+      let msg;
+      if (isOpen) {
+        msg = 'Open now — closes ' + fmtHour(span[1]);
+      } else if (span && hrs < span[0]) {
+        msg = 'Closed — opens ' + fmtHour(span[0]);
+      } else {
+        for (let i = 1; i <= 7; i++) {
+          const nd = (day + i) % 7;
+          if (HOURS[nd]) { msg = 'Closed — opens ' + DAY_NAMES[nd] + ' ' + fmtHour(HOURS[nd][0]); break; }
+        }
+      }
       textEls.forEach(t => { t.textContent = msg; });
     } catch (e) {}
   }
@@ -467,12 +482,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    setTimeout(() => {
-      const ghlScript = document.createElement('script');
-      ghlScript.src = 'https://widgets.leadconnectorhq.com/loader.js';
-      ghlScript.defer = true;
-      document.body.appendChild(ghlScript);
-    }, 1500);
+    // The calendar embed is sized by link.msgsndr.com/js/embed.js, attached
+    // from the page. The old widgets loader.js was for the previous bare
+    // widget URL and is no longer needed.
   });
 });
 

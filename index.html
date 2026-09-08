@@ -1225,7 +1225,9 @@
     <a class="pill" href="#book">Book Exam</a>
   </div>
 
-  <!-- Booking: GoHighLevel resize script + the live open/closed status -->
+  <!-- Booking: the GoHighLevel resize script for the calendar embed.
+       The open/closed status lives in engine.js, which drives BOTH displays
+       (the booking pill and the band panel). -->
   <script>
   (function () {
     /* 1 · GHL's embed script sizes the iframe to its content. Attached after
@@ -1240,60 +1242,6 @@
     if (document.readyState === 'complete') loadGHL();
     else addEventListener('load', loadGHL);
 
-    /* 2 · Open / closed, computed in the clinic's timezone rather than the
-       visitor's. Mon-Fri 09:00-17:00; closed Saturday and Sunday. */
-    var HOURS = { 1: [9, 17], 2: [9, 17], 3: [9, 17], 4: [9, 17], 5: [9, 17], 6: null, 0: null };
-    var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-    function fmt(hour) {
-      var h12 = hour % 12 || 12;
-      return h12 + ':00 ' + (hour < 12 ? 'AM' : 'PM');
-    }
-
-    function paint() {
-      var pills = document.querySelectorAll('.status-pill');
-      if (!pills.length) return;
-      var nyc, span, hrs, open, label;
-      try {
-        nyc = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
-      } catch (e) {
-        nyc = new Date();                        /* no Intl tz: fall back to local */
-      }
-      span = HOURS[nyc.getDay()];
-      hrs = nyc.getHours() + nyc.getMinutes() / 60;
-      open = !!span && hrs >= span[0] && hrs < span[1];
-
-      if (open) {
-        label = 'Open now — closes ' + fmt(span[1]);
-      } else {
-        var d = nyc.getDay();
-        /* if today is a weekday and we are before opening, we open today */
-        var todayLater = !!span && hrs < span[0];
-        if (todayLater) {
-          label = 'Closed — opens ' + fmt(span[0]);
-        } else {
-          for (var i = 1; i <= 7; i++) {
-            var nd = (d + i) % 7;
-            if (HOURS[nd]) {
-              label = 'Closed — opens ' + DAYS[nd] + ' ' + fmt(HOURS[nd][0]);
-              break;
-            }
-          }
-        }
-      }
-
-      for (var k = 0; k < pills.length; k++) {
-        var p = pills[k];
-        var txt = p.querySelector('span:last-child');
-        if (txt) txt.textContent = label;
-        p.classList.toggle('is-open', open);
-        p.classList.toggle('is-closed', !open);
-        p.setAttribute('aria-label', label);
-      }
-    }
-
-    paint();
-    setInterval(paint, 60000);                   /* so it flips at 5pm without a reload */
   })();
   </script>
 
@@ -1389,11 +1337,40 @@
       });
     });
 
+    /* On phones and tablets the pinned stage becomes four ordinary stacked
+       cards. Each caption is moved inside its own figure so image and text
+       stay together; unstack() puts them back if the viewport grows, so no
+       reload is needed when a desktop window is resized across the breakpoint. */
+    var stackMQ = matchMedia('(max-width: 900px), (max-aspect-ratio: 11/10)');
+    var copyBox = rig.querySelector('.visit-copy');
+    var stacked = false;
+
+    function stack() {
+      if (stacked) return;
+      for (var i = 0; i < N; i++) shots[i].appendChild(caps[i]);
+      rig.classList.add('is-stacked');
+      removeEventListener('scroll', onScroll);
+      stacked = true;
+    }
+    function unstack() {
+      if (!stacked) return;
+      for (var i = 0; i < N; i++) copyBox.appendChild(caps[i]);
+      rig.classList.remove('is-stacked');
+      stacked = false;
+      measure(); frame();
+      addEventListener('scroll', onScroll, { passive: true });
+    }
+
     function start() {
+      if (stackMQ.matches) { stack(); return; }
       if (reduce.matches) { paint(0); return; }
       measure(); frame();
       addEventListener('scroll', onScroll, { passive: true });
     }
+    stackMQ.addEventListener('change', function () {
+      if (stackMQ.matches) stack();
+      else if (!reduce.matches) unstack();
+    });
     var t;
     addEventListener('resize', function () {
       clearTimeout(t);

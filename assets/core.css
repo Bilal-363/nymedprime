@@ -2934,12 +2934,14 @@ footer.ftr {
   .doc-txt   { grid-column: 1 / -1; }
 }
 
-/* --- live status pill: the dot follows the computed state ----------------- */
-.status-pill.is-closed .pulse-dot { background: var(--dim); }
-.status-pill.is-closed .pulse-dot::after { display: none; }   /* no pulse when shut */
-.status-pill.is-open .pulse-dot { background: var(--ok); }
+/* --- live status dot ------------------------------------------------------
+   engine.js sets .is-open on the dot itself, not on the pill, so the earlier
+   .status-pill.is-open selectors never matched. The base .pulse-dot rules
+   already handle colour; this only stops the ping under reduced motion, which
+   the previous rule missed because the pulse is an animation on the element,
+   not a ::after. */
 @media (prefers-reduced-motion: reduce) {
-  .status-pill .pulse-dot::after { display: none; }
+  .pulse-dot.is-open { animation: none; box-shadow: none; }
 }
 
 /* --- hero scrim v3: the consultation plate puts the clinician at ~25-45% of
@@ -3015,3 +3017,81 @@ footer.ftr {
    measured 3.98:1 against that background, under the 4.5:1 floor for small
    text. --accent-deep takes it to 5.7:1 without changing the look. */
 .hero .eyebrow { color: var(--accent-deep); }
+
+/* ==========================================================================
+   S1b VISIT — unpin on mobile
+   Measured at a true 390px viewport: the rig was 3545px tall with an 844px
+   sticky stage, i.e. 4.2 screens where the page appears frozen while stills
+   cross-fade. On touch that reads as broken scrolling. Here it becomes four
+   ordinary stacked cards — image then its own caption — which scrolls
+   natively. JS moves each caption inside its figure and sets .is-stacked.
+   Desktop is untouched: every rule below is inside the mobile query.
+   ========================================================================== */
+@media (max-width: 900px), (max-aspect-ratio: 11/10) {
+  .visit { height: auto !important; --len: auto; }
+  .visit-stage {
+    position: static !important;
+    height: auto !important;
+    overflow: visible;
+    padding-block: calc(30 * var(--u));
+  }
+  .visit-arena { position: static; display: block; padding-inline: var(--gutter); }
+  .visit-scrim, .visit-dots, .visit-rail { display: none; }
+  .visit-copy { position: static; translate: none; width: auto; inset: auto; }
+
+  .visit.is-stacked .visit-copy { display: none; }   /* emptied by the reparent */
+
+  .visit.is-stacked .visit-shot {
+    display: block;
+    position: relative;
+    inset: auto;
+    opacity: 1;
+    transform: none;
+    transition: none;
+    margin: 0 0 calc(44 * var(--u));
+  }
+  .visit.is-stacked .visit-shot:last-of-type { margin-bottom: 0; }
+  .visit.is-stacked .visit-shot picture {
+    display: block;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .visit.is-stacked .visit-shot img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+  .visit.is-stacked .visit-cap {
+    position: static;
+    inset: auto;
+    opacity: 1;
+    transform: none;
+    transition: none;
+    pointer-events: auto;
+    margin-top: calc(20 * var(--u));
+  }
+  .visit.is-stacked .visit-head { font-size: calc(30 * var(--h)); margin-bottom: calc(12 * var(--h)); }
+  .visit.is-stacked .visit-body { font-size: calc(16 * var(--h)); max-width: none; }
+}
+
+/* ==========================================================================
+   HEADING LINE-HEIGHT — five rules were inheriting the body's 1.68
+   body has no line-height of its own, so it resolves to 1.68 and any heading
+   that sets font-size without setting line-height inherits it. Measured on a
+   390px viewport: .book-media h2 rendered at 40.74px type on a 68.44px line
+   box, which is what made "Reserve your immigration exam appointment" fall
+   apart into four widely spaced lines. .hero h1 (0.98) and .sec-title (1.02)
+   already set theirs; these five did not.
+   ========================================================================== */
+.book-media h2    { line-height: 1.12; }
+.mos-card h3      { line-height: 1.28; }
+.hpanel h3        { line-height: 1.22; }
+.callout--info h3 { line-height: 1.30; }
+.ftr-col h4       { line-height: 1.30; }
+
+/* the booking headline is a display size; give it room to breathe on a phone */
+@media (max-width: 900px), (max-aspect-ratio: 11/10) {
+  .book-media h2 { font-size: calc(31 * var(--h)); }
+}
