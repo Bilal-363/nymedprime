@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="assets/core.css">
 
   <!-- Three.js ES Module Importmap -->
-  <link rel="preload" as="image" fetchpriority="high" href="assets/ambient-clinic-poster.webp">
+  <link rel="preload" as="image" fetchpriority="high" href="assets/consult-plate-poster.webp">
   <script type="importmap">
   {
     "imports": {
@@ -65,16 +65,16 @@
         "medicalSpecialty": "PrimaryCare",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "ADDRESS_TBD",
+          "streetAddress": "15 E 40th St, Suite 201",
           "addressLocality": "New York",
           "addressRegion": "NY",
-          "postalCode": "ZIP_TBD",
+          "postalCode": "10016",
           "addressCountry": "US"
         },
         "geo": {
           "@type": "GeoCoordinates",
-          "latitude": 40.7831,
-          "longitude": -73.9712
+          "latitude": 40.7513,
+          "longitude": -73.9805
         },
         "openingHoursSpecification": [
           {
@@ -82,12 +82,6 @@
             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
             "opens": "09:00",
             "closes": "17:00"
-          },
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": "Saturday",
-            "opens": "10:00",
-            "closes": "14:00"
           }
         ],
         "employee": {
@@ -276,7 +270,7 @@
   <div class="topbar">
     <div class="topbar-items">
       <span>USCIS-DESIGNATED CIVIL SURGEON</span>
-      <span>ADDRESS_TBD, NEW YORK, NY</span>
+      <span>15 E 40TH ST, SUITE 201, NEW YORK, NY 10016</span>
     </div>
     <div>
       <a href="tel:+19179058140" style="color:#fbfaf7;">(917) 905-8140</a>
@@ -378,12 +372,12 @@
 
       <!-- Right Bleed Image Column -->
       <div class="hero-img appear appear--scale" style="--d:.20s">
-        <img class="hero-poster" src="assets/ambient-clinic-poster.webp" width="1280" height="720"
+        <img class="hero-poster" src="assets/consult-plate-poster.webp" width="1280" height="720"
              fetchpriority="high" decoding="async"
-             alt="Morning light in a quiet corridor at the NY MedCare clinic in Manhattan">
+             alt="A civil surgeon reviewing an immigration medical exam form with a patient in a clinic examination room">
         <video class="hero-plate" muted loop playsinline preload="metadata" tabindex="-1"
-               poster="assets/ambient-clinic-poster.webp" aria-hidden="true"
-               data-src="assets/ambient-clinic.mp4"></video>
+               poster="assets/consult-plate-poster.webp" aria-hidden="true"
+               data-src="assets/consult-plate.mp4"></video>
       </div>
 
     </section>
@@ -891,7 +885,10 @@
         </div>
 
         <div class="ghl-container">
-          <iframe src="https://api.leadconnectorhq.com/widget/booking" style="width: 100%; border:none; overflow: hidden; min-height: 700px;" scrolling="no" title="GoHighLevel Appointment Booking"></iframe>
+          <iframe src="https://api.leadconnectorhq.com/widget/booking/cBUWQx8L9J9YLJpDJZkn"
+                  allow="payment" scrolling="no" id="msgsndr-calendar"
+                  title="Book your USCIS immigration medical exam at NY MedCare"
+                  style="width: 100%; border: none; overflow: hidden; min-height: 700px;"></iframe>
         </div>
       </div>
     </section>
@@ -973,7 +970,7 @@
           <div class="afford-row"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Interpreters welcome</div>
           <div class="afford-row"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Family appointments</div>
           <div class="afford-row"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Adults & children</div>
-          <div class="afford-row"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Evening & Saturday slots</div>
+          <div class="afford-row"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Same-week appointments</div>
         </div>
       </div>
 
@@ -984,7 +981,7 @@
           <span class="pulse-dot"></span>
           <span class="status-val">Checking…</span>
         </div>
-        <div style="font-size: 14px; color: var(--muted); line-height: 1.5;">Mon–Fri 9:00–5:00<br>Sat 10:00–2:00</div>
+        <div style="font-size: 14px; color: var(--muted); line-height: 1.5;">Mon–Fri 9:00–5:00</div>
         <a class="ghost" href="tel:+19179058140" style="padding: 10px 20px; font-size: 14px;">Call (917) 905-8140</a>
       </div>
 
@@ -994,14 +991,14 @@
         <p style="font-size: calc(14.5 * var(--h)); color: rgba(251,250,247,.8); margin-bottom: 18px;">Convenient to multiple subway lines. Full directions and transit details are confirmed when you book.</p>
 
         <div style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">
-          <strong>Address:</strong> ADDRESS_TBD, New York, NY ZIP_TBD<br>
+          <strong>Address:</strong> 15 E 40th St, Suite 201, New York, NY 10016<br>
           <strong>Phone:</strong> (917) 905-8140<br>
           <strong>Email:</strong> <a href="mailto:info@nymedcare.com" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">info@nymedcare.com</a>
         </div>
 
         <div class="band-map-box">
           <iframe
-            src="https://maps.google.com/maps?q=40.7831,-73.9712&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            src="https://maps.google.com/maps?q=15%20E%2040th%20St%2C%20Suite%20201%2C%20New%20York%2C%20NY%2010016&t=&z=16&ie=UTF8&iwloc=&output=embed"
             loading="lazy"
             title="Map to NY MedCare, Manhattan, NY"
             referrerpolicy="no-referrer-when-downgrade">
@@ -1207,8 +1204,8 @@
         <p class="ftr-contact-p">
           <strong>Phone:</strong> <a href="tel:+19179058140">(917) 905-8140</a><br>
           <strong>Email:</strong> <a href="mailto:info@nymedcare.com">info@nymedcare.com</a><br>
-          <strong>Address:</strong> ADDRESS_TBD, New York, NY ZIP_TBD<br>
-          <strong>Hours:</strong> Mon–Fri 9:00–5:00 · Sat 10:00–2:00
+          <strong>Address:</strong> 15 E 40th St, Suite 201, New York, NY 10016<br>
+          <strong>Hours:</strong> Mon–Fri 9:00–5:00
         </p>
         <p class="ftr-disclaimer">NY MedCare is not affiliated with U.S. Citizenship and Immigration Services. We do not provide legal advice.</p>
       </div>
@@ -1225,6 +1222,78 @@
     <a class="ghost" href="tel:+19179058140">Call</a>
     <a class="pill" href="#book">Book Exam</a>
   </div>
+
+  <!-- Booking: GoHighLevel resize script + the live open/closed status -->
+  <script>
+  (function () {
+    /* 1 · GHL's embed script sizes the iframe to its content. Attached after
+       load so it never blocks first paint; the iframe keeps a 700px min-height
+       so the panel is correct even if this never arrives. */
+    function loadGHL() {
+      var s = document.createElement('script');
+      s.src = 'https://link.msgsndr.com/js/embed.js';
+      s.async = true;
+      document.body.appendChild(s);
+    }
+    if (document.readyState === 'complete') loadGHL();
+    else addEventListener('load', loadGHL);
+
+    /* 2 · Open / closed, computed in the clinic's timezone rather than the
+       visitor's. Mon-Fri 09:00-17:00; closed Saturday and Sunday. */
+    var HOURS = { 1: [9, 17], 2: [9, 17], 3: [9, 17], 4: [9, 17], 5: [9, 17], 6: null, 0: null };
+    var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    function fmt(hour) {
+      var h12 = hour % 12 || 12;
+      return h12 + ':00 ' + (hour < 12 ? 'AM' : 'PM');
+    }
+
+    function paint() {
+      var pills = document.querySelectorAll('.status-pill');
+      if (!pills.length) return;
+      var nyc, span, hrs, open, label;
+      try {
+        nyc = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
+      } catch (e) {
+        nyc = new Date();                        /* no Intl tz: fall back to local */
+      }
+      span = HOURS[nyc.getDay()];
+      hrs = nyc.getHours() + nyc.getMinutes() / 60;
+      open = !!span && hrs >= span[0] && hrs < span[1];
+
+      if (open) {
+        label = 'Open now — closes ' + fmt(span[1]);
+      } else {
+        var d = nyc.getDay();
+        /* if today is a weekday and we are before opening, we open today */
+        var todayLater = !!span && hrs < span[0];
+        if (todayLater) {
+          label = 'Closed — opens ' + fmt(span[0]);
+        } else {
+          for (var i = 1; i <= 7; i++) {
+            var nd = (d + i) % 7;
+            if (HOURS[nd]) {
+              label = 'Closed — opens ' + DAYS[nd] + ' ' + fmt(HOURS[nd][0]);
+              break;
+            }
+          }
+        }
+      }
+
+      for (var k = 0; k < pills.length; k++) {
+        var p = pills[k];
+        var txt = p.querySelector('span:last-child');
+        if (txt) txt.textContent = label;
+        p.classList.toggle('is-open', open);
+        p.classList.toggle('is-closed', !open);
+        p.setAttribute('aria-label', label);
+      }
+    }
+
+    paint();
+    setInterval(paint, 60000);                   /* so it flips at 5pm without a reload */
+  })();
+  </script>
 
   <!-- Hero slow-motion plate: never blocks first paint -->
   <script>

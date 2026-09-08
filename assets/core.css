@@ -2860,3 +2860,136 @@ footer.ftr {
 @media (max-width: 430px) {
   .doc-name { font-size: calc(38 * var(--h)); line-height: 1.06; }
 }
+
+/* ==========================================================================
+   TIGHTEN + JUSTIFY + PLATE POSITION
+   ========================================================================== */
+
+/* --- 1 · the portrait moves right, and the text column widens so the name
+       stops wrapping onto two lines at mid-range widths --- */
+/* Two real columns instead of a 12-col grid with empty tracks. The plate is
+   right-aligned inside a deliberately narrow left column, so the photo moves
+   toward the text without leaving a dead 2-column gap at the page edge. */
+.doctor { grid-template-columns: 0.82fr 1.18fr; }
+.doc-plate { grid-column: 1; justify-self: end; width: min(100%, calc(440 * var(--h))); }
+.doc-txt   { grid-column: 2; }
+.doc-name  { font-size: calc(54 * var(--h)); }
+
+/* --- 2 · remove the dashes from the credentials list --- */
+.creds li::before { content: none; }
+.creds li { padding-left: 0; }
+
+/* --- 3 · close up the vertical air. Every section was on 100-150 --u of
+       padding, which on a 1024-tall reference is 100-150px top AND bottom.
+       Roughly a 40% cut, applied consistently so the rhythm still holds. --- */
+.ribbon        { padding-block: calc(24 * var(--u)); }
+.arc-section   { padding: calc(62 * var(--u)) var(--gutter); }
+.why           { padding-block: calc(74 * var(--u)); }
+.why .act      { padding-block: calc(38 * var(--u)); }
+.included      { padding: calc(62 * var(--u)) var(--gutter); }
+.mosaic        { min-height: calc(600 * var(--u)); }
+.note          { padding-block: calc(44 * var(--u)); }
+.bring-trigger-sec { padding: calc(62 * var(--u)) var(--gutter); }
+.vax-sec       { padding: calc(62 * var(--u)) var(--gutter); }
+.book-media    { padding: calc(64 * var(--u)) calc(64 * var(--h)); }
+.book-pane     { padding: calc(50 * var(--u)) calc(56 * var(--h)); }
+.doctor        { padding-block: calc(88 * var(--u)); }
+.band > *      { padding: calc(52 * var(--u)) calc(48 * var(--h)); }
+.faq           { padding-block: calc(80 * var(--u)); }
+.cta           { min-height: calc(520 * var(--u)); padding: calc(76 * var(--u)) var(--gutter); }
+.ftr           { padding: calc(60 * var(--u)) var(--gutter) calc(30 * var(--u)); }
+.mos-card      { min-height: calc(272 * var(--u)); }
+.vax-detail    { min-height: calc(260 * var(--u)); }
+
+/* --- 4 · justified body copy, with hyphenation so the word gaps stay tight.
+       Left-aligned on anything narrow, where justification opens rivers. --- */
+.sec-lead,
+.doc-txt > p,
+.why .act p,
+.note p,
+.hpanel p,
+.visit-body,
+.vax-detail p,
+.ans p,
+.band p,
+.preview-item .nt,
+.ftr-brand-col p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+@media (max-width: 760px) {
+  .sec-lead, .doc-txt > p, .why .act p, .note p, .hpanel p, .visit-body,
+  .vax-detail p, .ans p, .band p, .preview-item .nt, .ftr-brand-col p,
+  .mos-card p {
+    text-align: left;
+    hyphens: manual;
+  }
+}
+
+@media (max-width: 1100px) {
+  .doc-plate { grid-column: 1 / -1; }
+  .doc-txt   { grid-column: 1 / -1; }
+}
+
+/* --- live status pill: the dot follows the computed state ----------------- */
+.status-pill.is-closed .pulse-dot { background: var(--dim); }
+.status-pill.is-closed .pulse-dot::after { display: none; }   /* no pulse when shut */
+.status-pill.is-open .pulse-dot { background: var(--ok); }
+@media (prefers-reduced-motion: reduce) {
+  .status-pill .pulse-dot::after { display: none; }
+}
+
+/* --- hero scrim v3: the consultation plate puts the clinician at ~25-45% of
+   frame width, right where the old scrim was heaviest (94-66%), which washed
+   her out. Measured the lightest ramp that still holds the headline:
+     .975/.94/.66/.24/.06  ->  6.44:1  (subjects too washed)
+     .95/.90/.55/.18/.04   ->  4.60:1  <- chosen, lightest that passes
+     .92/.84/.42/.12/0     ->  2.97:1  FAIL
+     narrow .97/.93/.34    ->  1.53:1  FAIL                                  */
+.hero-img::after {
+  background:
+    linear-gradient(90deg,
+      rgba(251,250,247,.95) 0%,
+      rgba(251,250,247,.90) 26%,
+      rgba(251,250,247,.55) 48%,
+      rgba(251,250,247,.18) 72%,
+      rgba(251,250,247,.04) 100%),
+    linear-gradient(0deg,
+      var(--void) 0%,
+      rgba(251,250,247,.58) 14%,
+      rgba(251,250,247,.10) 34%,
+      rgba(251,250,247,0)   52%);
+}
+/* Showing more of the frame's left edge pushes the two figures rightward, out
+   from under the headline. 16:9 in a ~1.48 container overflows ~309px
+   horizontally, so 26% crops 80px from the left instead of 155px at centre. */
+.hero-img .hero-poster,
+.hero-img .hero-plate { object-position: 26% 50%; }
+
+/* ==========================================================================
+   HERO HEADLINE — self-limiting size
+   Bug: the only small-screen breakpoint was `max-width: 430px`, so every
+   viewport from 431px to 900px (small tablets, phones in landscape,
+   split-screen windows) rendered the h1 at the full 72 * --h. Measured in a
+   512px-wide portrait viewport: font-size 69.84px, box 465px, and the single
+   word "Immigration" needs ~476px — so it overflowed the line box and was
+   clipped by .hero{overflow:hidden}.
+   Fix: cap the size against the viewport itself, so it can never outgrow its
+   column, and allow a break as a last-resort guard.
+   ========================================================================== */
+.hero h1 {
+  font-size: min(calc(72 * var(--h)), 11vw);
+  overflow-wrap: break-word;
+}
+@media (max-width: 430px) {
+  .hero h1 { font-size: min(calc(38 * var(--h)), 11vw); }
+}
+@media (min-width: 901px) and (max-height: 850px) {
+  .hero h1 { font-size: min(calc(60 * var(--h)), 11vw); }
+}
+@media (min-width: 901px) and (max-height: 720px) {
+  .hero h1 { font-size: min(calc(50 * var(--h)), 11vw); }
+}
