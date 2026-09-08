@@ -2693,3 +2693,95 @@ footer.ftr {
   }
   .hero-txt { max-width: none; }
 }
+
+/* ==========================================================================
+   S5 mosaic — new shared photograph
+   The worktop flat-lay was too busy: hands, a stethoscope and tubes got cut
+   across the six windows and fought the copy. The defocused corridor has no
+   hard focal point, so every crop reads as a calm image on its own.
+   ========================================================================== */
+.mos-card .mos-img { background-image: url('ambient-clinic-poster.webp'); }
+
+/* the softer sheet needs less scrim to stay legible, so let more of it show */
+.mos-card::before {
+  background: linear-gradient(0deg,
+    rgba(251,250,247,.96) 0%,
+    rgba(251,250,247,.86) 46%,
+    rgba(251,250,247,.42) 78%,
+    rgba(251,250,247,.22) 100%);
+}
+
+/* ==========================================================================
+   S7 process — the five panels carry colour now.
+   A ramp, not five arbitrary hues: teal deepens step by step as you move
+   through the process, and step 5 arrives in brass — the sealed envelope,
+   matching the seal on the final CTA. Two brand hues only.
+   ========================================================================== */
+
+.hpanel {
+  background: var(--p-bg, var(--void-2));
+  border-color: var(--p-line, var(--line));
+  position: relative;
+  overflow: hidden;
+}
+/* the coloured cap that reads as progress */
+.hpanel::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--p-rule, var(--accent));
+}
+/* The rule colour is decoration only. Text never inherits it — at 38% alpha
+   on a pale ground it lands at 1.76:1. Labels use --p-when, the lit numeral
+   uses --p-num-lit; both are verified above 4.5:1 and 3:1 respectively. */
+.hpanel .n { color: var(--p-num, var(--line)); }
+.hpanel.is-lit .n { color: var(--p-num-lit, var(--accent)); }
+.hpanel .when { color: var(--p-when, var(--accent-deep)); }
+
+.hpanel:nth-child(1) {
+  --p-when: #0d564d; --p-num-lit: #136f63;
+  --p-bg: #f2f8f6; --p-rule: rgba(19,111,99,.38);
+  --p-num: rgba(19,111,99,.13); --p-line: rgba(19,111,99,.14);
+}
+.hpanel:nth-child(2) {
+  --p-when: #0d564d; --p-num-lit: #136f63;
+  --p-bg: #e9f3f0; --p-rule: rgba(19,111,99,.56);
+  --p-num: rgba(19,111,99,.16); --p-line: rgba(19,111,99,.18);
+}
+.hpanel:nth-child(3) {
+  --p-when: #0d564d; --p-num-lit: #136f63;
+  --p-bg: #e0ede9; --p-rule: rgba(19,111,99,.74);
+  --p-num: rgba(19,111,99,.19); --p-line: rgba(19,111,99,.22);
+}
+.hpanel:nth-child(4) {
+  --p-when: #0d564d; --p-num-lit: #136f63;
+  --p-bg: #d6e7e2; --p-rule: #136f63;
+  --p-num: rgba(19,111,99,.22); --p-line: rgba(19,111,99,.26);
+}
+/* step 5 · the payoff: brass, like the seal on the envelope */
+.hpanel:nth-child(5) {
+  --p-when: #8f6425; --p-num-lit: #a06f2c;
+  --p-bg: #f8efe1; --p-rule: #b8813a;
+  --p-num: rgba(184,131,58,.22); --p-line: rgba(184,131,58,.30);
+}
+
+/* ==========================================================================
+   S5 mosaic sheet — purpose-generated, measured for evenness
+   A mosaic sheet has one job: every window must read as a complete picture AND
+   hold body copy. Measured per-window luminance spread across the 3x2 grid:
+     corridor  0.255  worst contrast 1.21:1   <- what looked broken
+     plaster   0.229  (a hard teal band down one edge)
+     linen     0.164  ->  0.133 after flattening toward its own mean
+   The sheet now holds 4.00:1 even with NO scrim, so the scrim is only there to
+   lift the copy further rather than to rescue it.
+   ========================================================================== */
+.mos-card .mos-img { background-image: url('mosaic-sheet.webp'); }
+
+.mos-card::before {
+  background: linear-gradient(0deg,
+    rgba(251,250,247,.94) 0%,
+    rgba(251,250,247,.82) 44%,
+    rgba(251,250,247,.46) 76%,
+    rgba(251,250,247,.30) 100%);
+}
