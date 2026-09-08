@@ -2,3 +2,9 @@
 Thumbs.db
 node_modules/
 *.log
+
+# working files, not shipped
+_unused/
+visit-raw/
+logo-concepts/
+*.bak

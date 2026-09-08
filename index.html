@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="assets/core.css">
 
   <!-- Three.js ES Module Importmap -->
+  <link rel="preload" as="image" fetchpriority="high" href="assets/ambient-clinic-poster.webp">
   <script type="importmap">
   {
     "imports": {
@@ -110,7 +111,7 @@
         "@id": "https://nymedprime.pages.dev/#organization",
         "name": "NY MedCare",
         "url": "https://nymedprime.pages.dev/",
-        "logo": "https://nymedprime.pages.dev/assets/logo-nymedcare-h.png",
+        "logo": "https://nymedprime.pages.dev/assets/logo-lockup.png",
         "telephone": "+19179058140"
       },
       {
@@ -283,11 +284,8 @@
   <header class="hdr">
     <div class="hdr-in">
       <a class="brand" href="/" aria-label="NY MedCare — home">
-        <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" focusable="false">
-          <rect x="1.25" y="1.25" width="29.5" height="29.5" rx="8.5" fill="none" stroke="currentColor" stroke-width="2.5"/>
-          <path d="M6 17.4h4.1l2.2-6.2 3.1 11.4 2.6-7.5 1.9 2.3H26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span class="brand-word">NY <b>MedCare</b></span>
+        <img class="brand-logo" src="assets/logo-lockup.png" width="560" height="133"
+             alt="NY MedCare" decoding="async">
       </a>
 
       <div class="hdr-right">
@@ -377,23 +375,80 @@
 
       <!-- Right Bleed Image Column -->
       <div class="hero-img appear appear--scale" style="--d:.20s">
-        <img src="assets/hero-still.webp" alt="Spotless medical examination room at NY MedCare in Manhattan">
+        <img class="hero-poster" src="assets/ambient-clinic-poster.webp" width="1280" height="720"
+             fetchpriority="high" decoding="async"
+             alt="Morning light in a quiet corridor at the NY MedCare clinic in Manhattan">
+        <video class="hero-plate" muted loop playsinline preload="metadata" tabindex="-1"
+               poster="assets/ambient-clinic-poster.webp" aria-hidden="true"
+               data-src="assets/ambient-clinic.mp4"></video>
       </div>
 
-      <!-- Seal Medallion on Seam -->
-      <div class="hero-medallion appear appear--pop" style="--d:1.24s" aria-hidden="true">
-        <svg viewBox="0 0 132 132" class="seal">
-          <defs><path id="heroMedArc" d="M66,66 m-49,0 a49,49 0 1,1 98,0 a49,49 0 1,1 -98,0"/></defs>
-          <circle cx="66" cy="66" r="57" fill="none" stroke="currentColor" stroke-width="1.4"/>
-          <circle cx="66" cy="66" r="40" fill="none" stroke="currentColor" stroke-width="1"/>
-          <text font-size="8.4" letter-spacing="3.1" fill="currentColor">
-            <textPath href="#heroMedArc">USCIS · CIVIL SURGEON · FORM I-693 · </textPath>
-          </text>
-          <path d="M52 74.5V57.5l14 12 14-12v17" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
+    </section>
 
-      <div class="hero-veil" aria-hidden="true"></div>
+    <!-- S1b · Your Visit: A33 layer swapper — four full-page stills, one per scroll -->
+    <section class="rig visit" id="visit" aria-label="What your visit looks like">
+      <div class="visit-stage">
+
+        <div class="visit-arena" aria-hidden="true">
+        <figure class="visit-shot is-active" data-i="0">
+          <picture>
+            <source srcset="assets/visit-1-exterior.webp" type="image/webp">
+            <img src="assets/visit-1-exterior.jpg" width="1376" height="768" fetchpriority="high" decoding="async" alt="The discreet street entrance of the NY MedCare office in Manhattan">
+          </picture>
+        </figure>
+        <figure class="visit-shot" data-i="1">
+          <picture>
+            <source srcset="assets/visit-2-reception.webp" type="image/webp">
+            <img src="assets/visit-2-reception.jpg" width="1376" height="768" loading="lazy" decoding="async" alt="The quiet reception and waiting area at NY MedCare">
+          </picture>
+        </figure>
+        <figure class="visit-shot" data-i="2">
+          <picture>
+            <source srcset="assets/visit-3-exam-room.webp" type="image/webp">
+            <img src="assets/visit-3-exam-room.jpg" width="1376" height="768" loading="lazy" decoding="async" alt="A prepared examination room at NY MedCare">
+          </picture>
+        </figure>
+        <figure class="visit-shot" data-i="3">
+          <picture>
+            <source srcset="assets/visit-4-sealed.webp" type="image/webp">
+            <img src="assets/visit-4-sealed.jpg" width="1376" height="768" loading="lazy" decoding="async" alt="A completed Form I-693 sealed in its envelope on the civil surgeon's desk">
+          </picture>
+        </figure>
+        </div>
+        <div class="visit-scrim" aria-hidden="true"></div>
+
+        <div class="visit-copy" aria-live="polite">
+        <div class="visit-cap is-active" data-i="0">
+          <p class="visit-eyebrow"><span class="visit-n">01</span> · Arrive</p>
+          <h2 class="visit-head">One address, one appointment</h2>
+          <p class="visit-body">Same-week appointments are usually available, minutes from several subway lines.</p>
+        </div>
+        <div class="visit-cap" data-i="1">
+          <p class="visit-eyebrow"><span class="visit-n">02</span> · Check in</p>
+          <h2 class="visit-head">No referral, no existing patient file</h2>
+          <p class="visit-body">Bring your photo ID, your vaccination records and your printed Form I-693 with Part 1 completed.</p>
+        </div>
+        <div class="visit-cap" data-i="2">
+          <p class="visit-eyebrow"><span class="visit-n">03</span> · Your exam</p>
+          <h2 class="visit-head">About an hour with Dr. Irshad</h2>
+          <p class="visit-body">The physical examination, your vaccination history reviewed, and every lab order and prescription written the same day.</p>
+        </div>
+        <div class="visit-cap" data-i="3">
+          <p class="visit-eyebrow"><span class="visit-n">04</span> · Sealed</p>
+          <h2 class="visit-head">Signed, sealed and ready to file</h2>
+          <p class="visit-body">Results reach us in 3 to 5 business days. You collect your sealed envelope, plus an unsealed copy to keep.</p>
+        </div>
+        </div>
+
+        <div class="visit-dots" role="tablist" aria-label="Visit steps">
+          <button type="button" class="visit-dot is-active" data-i="0" aria-label="Step 01 — Arrive"></button>
+          <button type="button" class="visit-dot" data-i="1" aria-label="Step 02 — Check in"></button>
+          <button type="button" class="visit-dot" data-i="2" aria-label="Step 03 — Your exam"></button>
+          <button type="button" class="visit-dot" data-i="3" aria-label="Step 04 — Sealed"></button>
+        </div>
+
+        <div class="visit-rail" aria-hidden="true"><i></i></div>
+      </div>
     </section>
 
     <!-- S2 · Credential Ribbon: Velocity Marquee -->
@@ -806,8 +861,8 @@
     <section class="book" id="book">
       <!-- Dark Media Panel (Left) -->
       <div class="book-media">
-        <video autoplay muted loop playsinline poster="assets/hero-still.webp" preload="none">
-          <source data-src="assets/hero-loop.mp4" type="video/mp4">
+        <video autoplay muted loop playsinline poster="assets/ambient-clinic-poster.webp" preload="none">
+          <source data-src="assets/ambient-clinic.mp4" type="video/mp4">
         </video>
         <span class="eyebrow" style="color:#b8813a;">Book Online</span>
         <h2>Reserve your immigration exam appointment</h2>
@@ -1112,12 +1167,9 @@
   <footer class="ftr">
     <div class="ftr-grid">
       <div class="ftr-brand-col">
-        <a class="brand" href="/" aria-label="NY MedCare — home">
-          <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false">
-            <rect x="1.25" y="1.25" width="29.5" height="29.5" rx="8.5" fill="none" stroke="currentColor" stroke-width="2.5"/>
-            <path d="M6 17.4h4.1l2.2-6.2 3.1 11.4 2.6-7.5 1.9 2.3H26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="brand-word">NY <b>MedCare</b></span>
+        <a class="brand brand--ftr" href="/" aria-label="NY MedCare — home">
+          <img class="brand-logo" src="assets/logo-lockup.png" width="560" height="133"
+               alt="NY MedCare" loading="lazy" decoding="async">
         </a>
         <p>USCIS-designated civil surgeon in Manhattan, NY. Form I-693 immigration medical examinations — one exam appointment, every lab and vaccine order written for you, and a properly sealed form.</p>
         <div class="ftr-socials">
@@ -1173,6 +1225,139 @@
     <a class="ghost" href="tel:+19179058140">Call</a>
     <a class="pill" href="#book">Book Exam</a>
   </div>
+
+  <!-- Hero slow-motion plate: never blocks first paint -->
+  <script>
+  (function () {
+    var v = document.querySelector('.hero-plate');
+    if (!v) return;
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    var conn = navigator.connection || {};
+    var cheap = conn.saveData === true ||
+                /^(2g|slow-2g)$/.test(conn.effectiveType || '');
+    if (reduce.matches || cheap) return;            /* poster only — no download */
+
+    function attach() {
+      var s = document.createElement('source');
+      s.src = v.dataset.src;
+      s.type = 'video/mp4';
+      v.appendChild(s);
+      v.load();
+      v.addEventListener('canplay', function () {
+        v.playbackRate = 0.7;                       /* the slow-motion feel */
+        v.classList.add('is-live');
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});   /* autoplay refused: poster stays */
+      }, { once: true });
+
+      /* stop paying for frames nobody sees */
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) v.pause();
+        else if (onScreen) v.play().catch(function () {});
+      });
+      var onScreen = true;
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) {
+          onScreen = es[0].isIntersecting;
+          if (onScreen) { if (!document.hidden) v.play().catch(function () {}); }
+          else v.pause();
+        }, { threshold: 0.01 }).observe(v);
+      }
+    }
+
+    if (document.readyState === 'complete') attach();
+    else addEventListener('load', attach);
+  })();
+  </script>
+
+  <!-- Your Visit: A33 swap driven by the real pin range -->
+  <script>
+  (function () {
+    var rig = document.getElementById('visit');
+    if (!rig) return;
+    var shots = [].slice.call(rig.querySelectorAll('.visit-shot'));
+    var caps  = [].slice.call(rig.querySelectorAll('.visit-cap'));
+    var dots  = [].slice.call(rig.querySelectorAll('.visit-dot'));
+    var N = shots.length;
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    var active = 0, pinTop = 0, pinLen = 1, raf = 0;
+
+    function measure() {
+      pinTop = rig.offsetTop;
+      pinLen = Math.max(1, rig.offsetHeight - innerHeight);  /* the REAL pin range */
+    }
+
+    function paint(i) {
+      for (var k = 0; k < N; k++) {
+        var isOn = k === i, isPast = k < i;
+        shots[k].classList.toggle('is-active', isOn);
+        shots[k].classList.toggle('is-past', isPast);
+        caps[k].classList.toggle('is-active', isOn);
+        caps[k].classList.toggle('is-past', isPast);
+        dots[k].classList.toggle('is-active', isOn);
+        dots[k].setAttribute('aria-selected', isOn ? 'true' : 'false');
+      }
+    }
+
+    function frame() {
+      raf = 0;
+      var p = (scrollY - pinTop) / pinLen;
+      p = p < 0 ? 0 : p > 1 ? 1 : p;
+      rig.style.setProperty('--visit-p', p.toFixed(4));
+      var i = Math.floor(p * N * 0.999);
+      if (i > N - 1) i = N - 1;
+      if (i !== active) { active = i; paint(i); }   /* guard: swap on change, not per pixel */
+    }
+
+    function onScroll() { if (!raf) raf = requestAnimationFrame(frame); }
+
+    dots.forEach(function (d, i) {
+      d.addEventListener('click', function () {
+        scrollTo({ top: pinTop + (i + 0.5) / N * pinLen,
+                   behavior: reduce.matches ? 'auto' : 'smooth' });
+      });
+    });
+
+    function start() {
+      if (reduce.matches) { paint(0); return; }
+      measure(); frame();
+      addEventListener('scroll', onScroll, { passive: true });
+    }
+    var t;
+    addEventListener('resize', function () {
+      clearTimeout(t);
+      t = setTimeout(function () { measure(); frame(); }, 150);
+    });
+    addEventListener('load', function () { measure(); frame(); });
+    reduce.addEventListener('change', function () { location.reload(); });
+    start();
+  })();
+  </script>
+
+  <!-- Mosaic: measure each window's offset into the shared photograph -->
+  <script>
+  (function () {
+    var sec = document.querySelector('.mosaic');
+    if (!sec) return;
+    var cards = sec.querySelectorAll('.mos-card');
+    function layoutMosaic() {
+      var r = sec.getBoundingClientRect();
+      sec.style.setProperty('--mos-w', r.width.toFixed(1) + 'px');
+      sec.style.setProperty('--mos-h', r.height.toFixed(1) + 'px');
+      for (var i = 0; i < cards.length; i++) {
+        var b = cards[i].getBoundingClientRect();
+        cards[i].style.setProperty('--mx', (-(b.left - r.left)).toFixed(1) + 'px');
+        cards[i].style.setProperty('--my', (-(b.top - r.top)).toFixed(1) + 'px');
+      }
+    }
+    var t;
+    function schedule() { clearTimeout(t); t = setTimeout(layoutMosaic, 150); }
+    layoutMosaic();
+    addEventListener('load', layoutMosaic);
+    addEventListener('resize', schedule);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutMosaic);
+  })();
+  </script>
 
   <!-- Scripts -->
   <script type="module" src="assets/engine.js"></script>

@@ -966,7 +966,7 @@ svg.arcs {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-image: url('assets/mosaic-worktop.jpg');
+  background-image: url('mosaic-worktop.jpg');
   background-repeat: no-repeat;
   background-size: var(--mos-w, 1200px) var(--mos-h, 720px);
   background-position: var(--mx, 0px) calc(var(--my, 0px) + var(--mos-drift, 0px));
@@ -2285,4 +2285,411 @@ footer.ftr {
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+
+/* ==========================================================================
+   OVERRIDES — logo lock-up, equal mosaic boxes, justified copy, nav hover
+   ========================================================================== */
+
+/* --- brand lock-up replaces the inline mark + text wordmark --- */
+.brand-logo {
+  display: block;
+  width: auto;
+  height: calc(38 * var(--u));
+  min-height: 30px;
+  max-height: 46px;
+}
+.hdr.is-stuck .brand-logo { height: calc(32 * var(--u)); }
+.brand--ftr .brand-logo { height: calc(42 * var(--u)); max-height: 52px; }
+.brand-logo, .hdr.is-stuck .brand-logo { transition: height .34s var(--ease-scroll); }
+
+/* --- S5 mosaic: six EQUAL windows, 3 across --- */
+.mosaic {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
+}
+.m1, .m2, .m3, .m4, .m5, .m6 { grid-column: auto; grid-row: auto; }
+.mos-card {
+  min-height: calc(330 * var(--u));
+  justify-content: flex-start;
+}
+.mos-card h3 { margin-top: auto; }
+
+/* --- justified body copy inside the windows --- */
+.mos-card p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* --- nav: a hover you can actually see --- */
+.nav-link {
+  position: relative;
+  transition: color .22s var(--ease-scroll);
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .28s var(--ease-scroll);
+}
+.nav-link:hover, .nav-link:focus-visible { color: var(--accent); }
+.nav-link:hover::after, .nav-link:focus-visible::after { transform: scaleX(1); }
+
+/* header buttons get a real hover too */
+.hdr-right .ghost, .hdr-right .pill { transition:
+  background-color .24s var(--ease-scroll),
+  color .24s var(--ease-scroll),
+  border-color .24s var(--ease-scroll),
+  transform .24s var(--ease-scroll),
+  box-shadow .24s var(--ease-scroll); }
+.hdr-right .ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-1px);
+}
+.hdr-right .pill:hover {
+  background: var(--accent);
+  color: #fbfaf7;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link::after { transition: none; }
+  .hdr-right .ghost:hover, .hdr-right .pill:hover { transform: none; }
+}
+
+/* --- mosaic on small screens: still equal, one column --- */
+@media (max-width: 1100px) {
+  .mosaic { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr); }
+}
+@media (max-aspect-ratio: 11/10), (max-width: 700px) {
+  .mosaic { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .mos-card { min-height: 250px; }
+  .mos-card p { text-align: left; hyphens: manual; }
+}
+
+/* --- hero: <picture> must fill the bleed column, and the crop keeps the
+       clinician in frame instead of centring on the empty middle --- */
+.hero-img picture { display: block; width: 100%; height: 100%; }
+
+/* ==========================================================================
+   S1b · YOUR VISIT — A33 layer swapper, four full-page stills, one per scroll
+   Pin length = 4 panels x 120vh. Progress is tied to the REAL pin range in JS.
+   ========================================================================== */
+
+.visit {
+  --len: 480vh;
+  height: var(--len);
+  position: relative;
+  overflow-x: clip;           /* never `hidden` — it would kill the sticky stage */
+  background: var(--void-3);  /* matches the image ground so each still blends */
+}
+.visit-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* --- the arena: four stills stacked, only one visible --- */
+.visit-arena { position: absolute; inset: 0; z-index: 0; }
+.visit-shot {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  transform: scale(1.055);
+  transition: opacity .52s linear, transform .68s var(--ease-scroll);
+  will-change: opacity, transform;
+}
+.visit-shot picture, .visit-shot img { display: block; width: 100%; height: 100%; }
+.visit-shot img { object-fit: cover; object-position: 50% 52%; }
+.visit-shot.is-active { opacity: 1; transform: scale(1); }
+/* panels already passed drop back rather than forward, so direction reads */
+.visit-shot.is-past { transform: scale(.955); }
+
+/* --- scrim: the type must stay legible over every one of the four --- */
+.visit-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(251,250,247,.95) 0%, rgba(251,250,247,.78) 34%,
+                           rgba(251,250,247,.16) 62%, rgba(251,250,247,0) 84%),
+    linear-gradient(0deg, rgba(251,250,247,.55) 0%, rgba(251,250,247,0) 42%);
+}
+
+/* --- the caption block --- */
+.visit-copy {
+  position: absolute;
+  z-index: 2;
+  left: var(--gutter);
+  top: 50%;
+  translate: 0 -50%;
+  width: min(calc(560 * var(--h)), 46vw);
+}
+.visit-cap {
+  position: absolute;
+  inset: auto auto auto 0;
+  bottom: 0;
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .42s linear, transform .62s var(--ease-scroll);
+  pointer-events: none;
+}
+.visit-cap.is-active { position: relative; opacity: 1; transform: translateY(0); pointer-events: auto; }
+.visit-cap.is-past { transform: translateY(-22px); }
+
+.visit-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: calc(12 * var(--h));
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: calc(18 * var(--h));
+}
+.visit-n {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: calc(20 * var(--h));
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--accent-2);
+}
+.visit-head {
+  font-family: 'Manrope', sans-serif;
+  font-size: calc(58 * var(--h));
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -.025em;
+  color: var(--ink);
+  text-wrap: balance;
+  margin-bottom: calc(20 * var(--h));
+}
+.visit-body {
+  font-family: 'Inter', sans-serif;
+  font-size: calc(18.5 * var(--h));
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: calc(470 * var(--h));
+}
+
+/* --- step dots --- */
+.visit-dots {
+  position: absolute;
+  z-index: 3;
+  left: var(--gutter);
+  bottom: calc(56 * var(--u));
+  display: flex;
+  gap: calc(9 * var(--h));
+}
+.visit-dot {
+  width: 30px; height: 3px;
+  border: 0; padding: 0;
+  border-radius: 3px;
+  background: rgba(20,18,16,.20);
+  cursor: pointer;
+  transition: background .3s var(--ease-scroll), width .3s var(--ease-scroll);
+}
+.visit-dot.is-active { background: var(--accent); width: 52px; }
+.visit-dot:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+/* --- progress rail along the bottom of the stage --- */
+.visit-rail {
+  position: absolute;
+  z-index: 3;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: var(--line-2);
+}
+.visit-rail i {
+  display: block;
+  height: 100%;
+  width: calc(var(--visit-p, 0) * 100%);
+  background: var(--accent);
+}
+
+/* --- tablet --- */
+@media (max-width: 1100px) {
+  .visit-head { font-size: calc(46 * var(--h)); }
+  .visit-copy { width: min(calc(520 * var(--h)), 58vw); }
+}
+
+/* --- phone: copy sits at the bottom over a stronger bottom scrim --- */
+@media (max-aspect-ratio: 11/10), (max-width: 700px) {
+  .visit { --len: 420vh; }
+  .visit-scrim {
+    background: linear-gradient(0deg, rgba(251,250,247,.97) 0%, rgba(251,250,247,.88) 34%,
+                                      rgba(251,250,247,.30) 60%, rgba(251,250,247,0) 88%);
+  }
+  .visit-copy {
+    left: var(--gutter);
+    right: var(--gutter);
+    top: auto;
+    bottom: calc(112 * var(--u));
+    translate: none;
+    width: auto;
+  }
+  .visit-head { font-size: calc(38 * var(--h)); }
+  .visit-body { font-size: calc(16.5 * var(--h)); max-width: none; }
+  .visit-dots { bottom: calc(64 * var(--u)); }
+  .visit-shot img { object-position: 52% 50%; }
+}
+
+/* --- reduced motion: unpin entirely, show all four stacked and readable --- */
+@media (prefers-reduced-motion: reduce) {
+  .visit { height: auto; --len: auto; }
+  .visit-stage { position: static; height: auto; }
+  .visit-arena { position: static; }
+  /* A33: show ONE representative still, no swap */
+  .visit-shot { display: none; }
+  .visit-shot[data-i="0"] {
+    display: block;
+    position: relative;
+    opacity: 1;
+    transform: none;
+    transition: none;
+    aspect-ratio: 16 / 9;
+  }
+  .visit-scrim { display: none; }
+  .visit-copy {
+    position: static;
+    translate: none;
+    width: auto;
+    padding: calc(30 * var(--u)) var(--gutter) calc(60 * var(--u));
+  }
+  .visit-cap {
+    position: relative;
+    opacity: 1;
+    transform: none;
+    transition: none;
+    margin-bottom: calc(40 * var(--u));
+    pointer-events: auto;
+  }
+  .visit-dots, .visit-rail { display: none; }
+}
+
+/* --- hero slow-motion plate (video.md V1) ---------------------------------
+   The poster is frame 0 of the clip, so the handoff is invisible. The video
+   sits on top at opacity 0 and only fades in once it can actually play, which
+   means a blocked or refused autoplay simply leaves a finished-looking still. */
+.hero-poster,
+.hero-plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 46% 52%;
+}
+.hero-plate {
+  opacity: 0;
+  transition: opacity .7s linear;
+  pointer-events: none;            /* never let the plate take a click */
+}
+.hero-plate.is-live { opacity: 1; }
+
+/* V1 requires both fades — the side fade keeps the type column legible,
+   the bottom fade drops the plate into the page colour. */
+.hero-img::after {
+  background:
+    linear-gradient(90deg, var(--void) 0%, rgba(251,250,247,.35) 22%, transparent 55%),
+    linear-gradient(0deg, var(--void) 0%, rgba(251,250,247,.30) 12%, transparent 34%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-plate { display: none; }   /* poster only, per V1 */
+}
+
+/* ==========================================================================
+   HERO v2.1 — the plate goes FULL-BLEED behind the whole first viewport.
+   Why: a 16:9 clip inside a 42%-wide, 100dvh column is cropped to a vertical
+   sliver, so you only ever saw the edge of the room. Full-bleed shows the
+   real frame, and the scrim carries the type instead of a column edge.
+   ========================================================================== */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;      /* bottom-weighted: reads as a film frame */
+  align-items: flex-start;
+  grid-template-columns: none;
+  padding: 0 var(--gutter) calc(94 * var(--u));
+  position: relative;
+  overflow: hidden;               /* the hero is not an ancestor of a sticky rig */
+}
+
+/* the media becomes the ground, not a column */
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 0;
+  z-index: 0;
+  transform: translate3d(0, var(--hero-img-y), 0) scale(var(--hero-img-s));
+  transform-origin: center center;
+}
+.hero-img .hero-poster,
+.hero-img .hero-plate { object-position: 50% 50%; }
+
+/* the scrim does the legibility work — ink type needs a near-solid left third */
+.hero-img::after {
+  background:
+    linear-gradient(90deg,
+      rgba(251,250,247,.975) 0%,
+      rgba(251,250,247,.94)  26%,
+      rgba(251,250,247,.66)  48%,
+      rgba(251,250,247,.24)  72%,
+      rgba(251,250,247,.06) 100%),
+    linear-gradient(0deg,
+      var(--void) 0%,
+      rgba(251,250,247,.62) 14%,
+      rgba(251,250,247,.10) 34%,
+      rgba(251,250,247,0)   52%);
+}
+
+.hero-txt {
+  position: relative;
+  z-index: 2;
+  max-width: calc(820 * var(--h));
+}
+.hero-txt h1 { max-width: calc(780 * var(--h)); }
+.hero-txt .lead { max-width: calc(560 * var(--h)); }
+
+/* --- portrait: the scrim flips to bottom-weighted, since there is no left
+       third to hide in on a narrow screen --- */
+@media (max-aspect-ratio: 11/10), (max-width: 700px) {
+  .hero { padding-bottom: calc(124 * var(--u)); }
+  .hero-img {
+    height: 100%;
+    border-radius: 0;   /* was a rounded bottom band; it is the ground now */
+    order: 0;
+  }
+  .hero-img .hero-poster,
+  .hero-img .hero-plate { object-position: 54% 46%; }
+  .hero-img::after {
+    background: linear-gradient(0deg,
+      var(--void) 0%,
+      rgba(251,250,247,.965) 26%,
+      rgba(251,250,247,.86)  44%,
+      rgba(251,250,247,.34)  66%,
+      rgba(251,250,247,0)    92%);
+  }
+  .hero-txt { max-width: none; }
 }
