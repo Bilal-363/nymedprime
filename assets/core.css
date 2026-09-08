@@ -3204,3 +3204,116 @@ footer.ftr {
     margin-top: calc(4 * var(--h));
   }
 }
+
+/* ==========================================================================
+   MOBILE PASS  (<= 900px)
+   Audited at a real 390px viewport. Fixes, in order of severity:
+   1. The hero video was a full-bleed background under a 97% scrim, so it only
+      ever showed a washed-out window and part of a laptop — neither person was
+      visible. It becomes a 16:9 panel above the type, which shows 100% of the
+      frame, same reasoning as the desktop panel.
+   2. .sec-title was 44.6px at 390px, which broke "I-693" across lines.
+   3. Body copy measured 14.1-15.5px in six places; 16px is the floor for
+      copy that non-native English speakers have to read on a phone.
+   4. .modal-close-btn was 38x38 against a 44px minimum.
+   ========================================================================== */
+@media (max-width: 900px) {
+
+  /* --- 1 · hero becomes video-on-top, type below on clean ground --- */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 0;
+    padding: calc(26 * var(--u)) var(--gutter) calc(46 * var(--u));
+    overflow: visible;
+  }
+  .hero-img {
+    position: relative;
+    inset: auto;
+    order: -1;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transform: none;
+    margin-bottom: calc(30 * var(--u));
+  }
+  .hero-img::after { display: none; }      /* type is below it now, not over it */
+  .hero-img .hero-poster,
+  .hero-img .hero-plate {
+    transform: none;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+  /* the scroll parallax was written for a full-bleed plate; neutralise it */
+  .hero .eyebrow,
+  .hero h1,
+  .hero .lead,
+  .hero .actions {
+    transform: none;
+    opacity: 1;
+  }
+  .hero .eyebrow { color: var(--accent); }
+  .hero-txt { position: static; width: 100%; max-width: 100%; }
+  .scroll-cue { display: none; }
+
+  /* --- 2 · headings sized for a 390px column --- */
+  .sec-title { font-size: calc(31 * var(--h)); line-height: 1.12; }
+  .doc-name  { font-size: calc(34 * var(--h)); }
+  .visit-head { font-size: calc(27 * var(--h)); }
+  .faq summary { font-size: calc(18 * var(--h)); }
+
+  /* --- 3 · body copy floor --- */
+  .mos-card p,
+  .visit-body,
+  .ans p,
+  .creds li,
+  .band p,
+  .sub-note,
+  .reassurance-row,
+  .chk .nt,
+  .ftr-col a,
+  .ftr-contact-p,
+  .quote-name,
+  .quote-place { font-size: calc(16 * var(--h)); }
+  .ftr-col a { line-height: 1.9; }          /* keeps the 44px tap target */
+
+  /* --- 4 · tap targets --- */
+  .modal-close-btn { width: 44px; height: 44px; }
+  .visit-dot { padding-block: 14px; background-clip: content-box; }
+}
+
+/* Those four blocks carried hardcoded 14px inline styles, which beat every
+   stylesheet rule. They now use classes so the mobile floor can apply. */
+.talk-note    { font-size: calc(14 * var(--h)); }
+.band-hours   { font-size: calc(14 * var(--h)); color: var(--muted); line-height: 1.5; }
+.band-call    { padding: 10px 20px; font-size: calc(14 * var(--h)); }
+.band-contact { font-size: calc(14 * var(--h)); line-height: 1.6; margin-bottom: 16px; }
+
+@media (max-width: 900px) {
+  /* --h resolves to 0.97 on a phone, so calc(16 * --h) lands at 15.5px.
+     These use absolute px to actually reach the 16px reading floor. */
+  .mos-card p, .visit-body, .ans p, .creds li, .band p,
+  .sub-note, .reassurance-row, .chk .nt, .ftr-contact-p,
+  .talk-note, .band-hours, .band-call, .band-contact,
+  .quote-name, .quote-place, .band-area-item { font-size: 16px; }
+  .ftr-col a { font-size: 16px; line-height: 1.85; }
+  .pill, .ghost { font-size: 16px; }
+
+  /* a true 44px target, padding and border included */
+  .modal-close-btn { min-width: 44px; min-height: 44px; box-sizing: border-box; }
+  .ftr-bottom a { display: inline-block; padding-block: 12px; }
+}
+
+.band-note { font-size: calc(15 * var(--h)); color: var(--muted); line-height: 1.6; }
+.band-lead { font-size: calc(14.5 * var(--h)); color: rgba(251,250,247,.8); }
+
+@media (max-width: 900px) {
+  /* .visit.is-stacked .visit-body is 0,3,0 and was out-ranking the floor */
+  .visit.is-stacked .visit-body,
+  .band-note,
+  .band-lead { font-size: 16px; }
+}
