@@ -2967,7 +2967,7 @@ footer.ftr {
    from under the headline. 16:9 in a ~1.48 container overflows ~309px
    horizontally, so 26% crops 80px from the left instead of 155px at centre. */
 .hero-img .hero-poster,
-.hero-img .hero-plate { object-position: 26% 50%; }
+.hero-img .hero-plate { object-position: 50% 50%; }
 
 /* ==========================================================================
    HERO HEADLINE — self-limiting size
@@ -2992,4 +2992,18 @@ footer.ftr {
 }
 @media (min-width: 901px) and (max-height: 720px) {
   .hero h1 { font-size: min(calc(50 * var(--h)), 11vw); }
+}
+
+/* --- hero plate: mirrored -------------------------------------------------
+   The reference footage places the clinician in the left third and the patient
+   on the right. The headline owns the left half, so at every crop she ended up
+   behind the type while the patient's hair dominated the right edge. Mirroring
+   puts the clinician in the clear right half and pushes the patient into the
+   scrimmed left. The only cost is the wall posters reading reversed, and they
+   are already illegible at this scale and behind 90-95% scrim.
+   -------------------------------------------------------------------------- */
+.hero-img .hero-poster,
+.hero-img .hero-plate {
+  transform: scaleX(-1) scale(1.08);
+  object-position: 50% 42%;
 }
