@@ -3219,3 +3219,68 @@ footer.ftr {
 /* the checklist preview rows are short two-part lines (name — note); justifying
    them stretched "Form  I-693,  edition" across the row. They stay ragged. */
 .preview-item { text-align: left; }
+
+/* ==========================================================================
+   S3 "BY THE NUMBERS" — ledger replaces the concentric arcs
+   The arcs read as stray curved hairlines rather than a graphic, and the
+   figures were too small to scan. Four hairline rows now carry the numbers at
+   real size, in the same language as the Why-us rows and the credentials
+   list. One treatment for every width, so there is no separate mobile grid.
+   ========================================================================== */
+.stat-ledger {
+  margin: 0;
+  padding: 0;
+  align-self: center;
+}
+.stat-row {
+  display: grid;
+  grid-template-columns: minmax(calc(120 * var(--h)), auto) 1fr;
+  align-items: baseline;
+  gap: calc(28 * var(--h));
+  padding-block: calc(26 * var(--u));
+  border-top: 1px solid var(--line);
+}
+.stat-row:last-child { border-bottom: 1px solid var(--line); }
+
+.stat-num {
+  margin: 0;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  font-size: calc(84 * var(--h));
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  color: var(--accent-2);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.stat-lbl {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: calc(13 * var(--h));
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* the section is two columns on desktop, stacked below */
+@media (min-width: 901px) {
+  .arc-section {
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    gap: calc(72 * var(--h));
+    align-items: center;
+  }
+  .arc-content { align-self: center; }
+}
+@media (max-width: 900px) {
+  .arc-section { display: block; }
+  .stat-ledger { margin-top: calc(34 * var(--u)); }
+  .stat-row {
+    grid-template-columns: minmax(calc(92 * var(--h)), auto) 1fr;
+    gap: calc(20 * var(--h));
+    padding-block: calc(20 * var(--u));
+  }
+  .stat-num { font-size: calc(58 * var(--h)); }
+  .stat-lbl { font-size: 13px; letter-spacing: 0.14em; }
+}
