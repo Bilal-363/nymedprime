@@ -3137,3 +3137,85 @@ footer.ftr {
   }
   .stage { padding-top: calc(30 * var(--u)); }
 }
+
+/* ==========================================================================
+   1 · CHECKLIST TRIGGER — the button was landing on top of the copy
+   .trigger-cta-bar was position:absolute at the bottom of .trigger-plate, so
+   it sat over the third preview row ("All vaccination records — including
+   ...") instead of below it. It now sits in normal flow under the list, and
+   the list's fade starts later so the last row is still clearly a preview.
+   ========================================================================== */
+.trigger-cta-bar {
+  position: static;
+  transform: none;
+  left: auto;
+  bottom: auto;
+  margin-top: calc(26 * var(--u));
+  text-align: center;
+}
+.preview-list {
+  mask-image: linear-gradient(180deg, #000 76%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 76%, transparent 100%);
+  padding-bottom: calc(6 * var(--u));
+}
+.trigger-plate { padding-bottom: calc(38 * var(--h)); }
+
+/* ==========================================================================
+   2 · JUSTIFIED BODY COPY, SITE-WIDE
+   Previously only some sections were justified and it reverted to ragged-left
+   below 760px. Every block of running copy is justified now, at every width,
+   with automatic hyphenation so the word spacing stays even rather than
+   opening rivers on a narrow column.
+   Deliberately NOT justified: headings, eyebrows, labels, buttons, table-like
+   rows and anything centred, where justification has nothing to align to.
+   ========================================================================== */
+.hero .lead,
+.sec-lead,
+.doc-txt > p,
+.why .act p,
+.note p,
+.hpanel p,
+.mos-card p,
+.vax-detail p,
+.vax-note,
+.ans p,
+.band p,
+.band-note,
+.band-lead,
+.preview-item .nt,
+.ftr-brand-col p,
+.ftr-disclaimer,
+.book-media .lead,
+.callout--info p,
+.callout--alert p,
+.quote-text,
+.sub-note {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* the earlier rule that un-justified everything on small screens is retired;
+   hyphenation is what keeps a 390px column readable when justified */
+@media (max-width: 760px) {
+  .sec-lead, .doc-txt > p, .why .act p, .note p, .hpanel p, .vax-detail p,
+  .ans p, .band p, .preview-item .nt, .ftr-brand-col p, .mos-card p,
+  .hero .lead {
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+}
+@media (max-aspect-ratio: 11/10), (max-width: 700px) {
+  .mos-card p { text-align: justify; hyphens: auto; }
+}
+
+/* centred copy can't be justified — keep these ragged */
+.post-cta p,
+.cta .lead,
+.trigger-cta-bar .sub-note { text-align: center; }
+
+/* the checklist preview rows are short two-part lines (name — note); justifying
+   them stretched "Form  I-693,  edition" across the row. They stay ragged. */
+.preview-item { text-align: left; }
