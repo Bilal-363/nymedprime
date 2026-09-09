@@ -127,7 +127,7 @@ def head(title, desc, canon, depth, kw=None, ld_blocks=(), og_type="article"):
 
   <header class="hdr is-stuck">
     <div class="hdr-in">
-      <a class="brand" href="/" aria-label="NY MedCare — home">
+      <a class="brand" href="/" aria-label="NY MedCare home">
         <img class="brand-logo" src="{up}assets/logo-lockup.png" width="560" height="133" alt="NY MedCare" decoding="async">
       </a>
       <div class="hdr-right">
@@ -156,10 +156,10 @@ def footer(depth):
   <footer class="ftr">
     <div class="ftr-grid">
       <div class="ftr-brand-col">
-        <a class="brand brand--ftr" href="/" aria-label="NY MedCare — home">
+        <a class="brand brand--ftr" href="/" aria-label="NY MedCare home">
           <img class="brand-logo" src="{up}assets/logo-lockup.png" width="560" height="133" alt="NY MedCare" loading="lazy" decoding="async">
         </a>
-        <p>USCIS-designated civil surgeon in Manhattan, NY. Form I-693 immigration medical examinations — one exam appointment, every lab and vaccine order written for you, and a properly sealed form.</p>
+        <p>USCIS-designated civil surgeon in Manhattan, NY. Form I-693 immigration medical examinations: one exam appointment, every lab and vaccine order written for you, and a properly sealed form.</p>
       </div>
       <div class="ftr-col">
         <h4>Guides</h4>
@@ -306,7 +306,7 @@ for a in ARTICLES:
 
       <p class="post-legal">This page is general information about a USCIS form, published by a medical
         practice. It is not legal advice, and NY MedCare is not affiliated with U.S. Citizenship and
-        Immigration Services. Requirements and guidance change &mdash; verify anything date-specific
+        Immigration Services. Requirements and guidance change, so verify anything date-specific
         against uscis.gov or with your immigration attorney before you file.</p>
     </article>
   </main>
@@ -350,8 +350,8 @@ rows = "".join(
         </li>\n""" for i, a in enumerate(rest, start=2))
 
 index = head("Immigration Medical Exam Guides | NY MedCare",
-             "Plain-language guides to the USCIS immigration medical exam and Form I-693 — requirements, "
-             "vaccinations, the TB blood test and validity — from a Manhattan civil surgeon.",
+             "Plain-language guides to the USCIS immigration medical exam and Form I-693: requirements, "
+             "vaccinations, the TB blood test and validity, from a Manhattan civil surgeon.",
              idx_canon, 1,
              kw="immigration medical exam guide, form i-693 help, uscis civil surgeon nyc",
              ld_blocks=[blog_ld, crumbs()], og_type="website") + f"""
@@ -366,7 +366,7 @@ index = head("Immigration Medical Exam Guides | NY MedCare",
       <h1>Straight answers about the immigration medical exam</h1>
       <p class="blog-dek">The I-693 is not complicated once someone explains it in order. These guides
         cover what the exam involves, what to bring, which vaccinations apply and how long a completed
-        form stays valid &mdash; written by the practice that performs them.</p>
+        form stays valid, written by the practice that performs them.</p>
     </header>
 
     <a class="feature" href="/blog/{feature['slug']}/">

@@ -49,12 +49,12 @@ ARTICLES = [
       <h2>What happens during the appointment</h2>
       <p>The examination itself is straightforward and takes roughly an hour. It covers:</p>
       <ul>
-        <li>A <strong>physical examination</strong> &mdash; eyes, ears, nose and throat, heart, lungs,
+        <li>A <strong>physical examination</strong>: eyes, ears, nose and throat, heart, lungs,
             abdomen, lymph nodes, skin and extremities, plus height, weight, blood pressure and vision.</li>
         <li>A <strong>tuberculosis screen</strong>. The CDC requires an Interferon Gamma Release Assay
             (IGRA) blood test for applicants aged 2 and older. The older PPD skin test is no longer
             accepted as the initial screen.</li>
-        <li><strong>Required blood and urine laboratory work</strong> &mdash; syphilis serology and
+        <li><strong>Required blood and urine laboratory work</strong>: syphilis serology and
             gonorrhea testing within the CDC-specified age ranges.</li>
         <li>A <strong>review of your vaccination history</strong> against the CDC schedule for your age,
             and prescriptions for anything still outstanding.</li>
@@ -69,7 +69,7 @@ ARTICLES = [
          seals it in the envelope USCIS requires, and hands it to you along with an unsealed duplicate
          for your own records.</p>
       <p><strong>Do not open the sealed envelope.</strong> USCIS will reject a Form I-693 that arrives
-         opened or tampered with. That is exactly why you are given a separate copy &mdash; so you never
+         opened or tampered with. That is exactly why you are given a separate copy, so you never
          have a reason to break the seal.</p>
 
       <h2>How long the whole thing takes</h2>
@@ -85,7 +85,7 @@ ARTICLES = [
          <a href="tel:+19179058140">(917) 905-8140</a> for current pricing.</p>
 
       <h2>Getting here</h2>
-      <p>Our office is at 15 E 40th St, Suite 201, in Manhattan &mdash; convenient to several subway
+      <p>Our office is at 15 E 40th St, Suite 201, in Manhattan, convenient to several subway
          lines. Applicants regularly travel in from all five boroughs, as well as Westchester, Long
          Island and northern New Jersey, because the exam takes a single appointment. Families are
          routinely scheduled back to back so everyone is finished in one trip; each applicant still needs
@@ -102,7 +102,7 @@ ARTICLES = [
  "cat": "Preparing",
  "dek": "Arriving with the right paperwork is the single biggest thing you control. It is what lets the civil surgeon write the correct orders the first time, instead of the second.",
  "glance": [
-   "Bring the <strong>01/20/2025 edition</strong> &mdash; since 3 July 2025 USCIS accepts only that edition.",
+   "Bring the <strong>01/20/2025 edition</strong>, since 3 July 2025 USCIS accepts only that edition.",
    "Complete <strong>Part 1 yourself</strong> before you arrive; leave the rest for the civil surgeon.",
    "Bring every vaccination record you have, including records from your home country.",
    "Missing an item rarely stops the exam, but it can delay your sealed form.",
@@ -116,21 +116,21 @@ ARTICLES = [
       <h2>Bring the right edition</h2>
       <p>Editions matter more than people expect. Bring the <strong>01/20/2025 edition</strong>. Since
          <strong>3 July 2025</strong>, USCIS has accepted only that edition. Download it fresh from
-         uscis.gov rather than reusing an old printout you saved months ago &mdash; an outdated edition
+         uscis.gov rather than reusing an old printout you saved months ago. An outdated edition
          means the form has to be completed again.</p>
       <p>Fill in <strong>Part 1</strong> yourself before your appointment. Everything after that belongs
          to the civil surgeon.</p>
 
       <h2>The eight things to bring</h2>
       <ol class="chk-list">
-        <li><strong>Government-issued photo ID</strong> &mdash; passport, driver&rsquo;s license or state ID.</li>
-        <li><strong>Form I-693, edition 01/20/2025</strong> &mdash; printed, with Part 1 completed by you.</li>
-        <li><strong>All vaccination records</strong> &mdash; including records from your home country, however old.</li>
+        <li><strong>Government-issued photo ID</strong>: passport, driver&rsquo;s license or state ID.</li>
+        <li><strong>Form I-693, edition 01/20/2025</strong>: printed, with Part 1 completed by you.</li>
+        <li><strong>All vaccination records</strong>: including records from your home country, however old.</li>
         <li><strong>Your USCIS receipt notice or A-number</strong>, if one has been issued to you.</li>
         <li><strong>A list of current medications</strong>, and any relevant medical or surgical history.</li>
-        <li><strong>Prior TB testing or treatment records</strong> &mdash; including any past chest X-ray reports.</li>
+        <li><strong>Prior TB testing or treatment records</strong>: including any past chest X-ray reports.</li>
         <li><strong>An interpreter</strong>, if you would be more comfortable with one.</li>
-        <li><strong>A payment method</strong> &mdash; immigration exams are typically self-pay.</li>
+        <li><strong>A payment method</strong>: immigration exams are typically self-pay.</li>
       </ol>
 
       <h2>What the civil surgeon completes</h2>
@@ -150,10 +150,10 @@ ARTICLES = [
       <ul>
         <li><strong>An outdated form edition</strong>, which has to be redone.</li>
         <li><strong>Missing vaccination records</strong>, which either means new doses or blood titers to
-            document existing immunity. Both are workable &mdash; see our guide to
+            document existing immunity. Both are workable. See our guide to
             <a href="/blog/uscis-vaccination-requirements/">USCIS vaccination requirements</a>.</li>
         <li><strong>A positive TB screen</strong>, which requires a chest X-ray and further evaluation
-            before the form can be completed. It is not a disqualification &mdash; see
+            before the form can be completed. It is not a disqualification. See
             <a href="/blog/tb-blood-test-igra-immigration/">the TB blood test explained</a>.</li>
       </ul>
       <p>None of these stop your application. They change the timeline, which is why arriving prepared is
@@ -173,7 +173,7 @@ ARTICLES = [
    "Requirements follow the <strong>CDC immunization schedule</strong> and depend on your age.",
    "<strong>Polio (IPV)</strong> was added to the technical instructions for civil surgeons in May 2024.",
    "The <strong>COVID-19 requirement was removed</strong> by USCIS effective 22 January 2025.",
-   "Lost records are common and not a dead end &mdash; blood titers can document existing immunity.",
+   "Lost records are common and not a dead end. Blood titers can document existing immunity.",
  ],
  "body": """
       <h2>How the requirements are set</h2>
@@ -251,7 +251,7 @@ ARTICLES = [
  ],
  "body": """
       <h2>Why a blood test and not a skin test</h2>
-      <p>For many years the tuberculosis screen was a PPD skin test &mdash; the small injection in the
+      <p>For many years the tuberculosis screen was a PPD skin test, the small injection in the
          forearm that you returned to have read a couple of days later. CDC technical instructions now
          require an <strong>Interferon Gamma Release Assay (IGRA)</strong> blood test for applicants aged
          <strong>2 and older</strong>, and the PPD skin test is no longer accepted as the initial screen.</p>
@@ -315,7 +315,7 @@ ARTICLES = [
       <p>Because the rule genuinely has changed. Earlier guidance treated the form as valid for a fixed
          period from the date of signature, which meant applicants whose cases took a long time sometimes
          had to repeat the entire examination. Articles, forum posts and even printed checklists written
-         under the older approach are still circulating, and they are not malicious &mdash; they are just
+         under the older approach are still circulating, and they are not malicious, just
          out of date.</p>
       <p>This is also why we will not tell you to rely on this page alone.</p>
 
@@ -334,7 +334,7 @@ ARTICLES = [
       <p>If it turns out your examination falls outside the current window, a fresh examination is
          straightforward: it is one appointment, and the laboratory work follows the same
          <strong>3 to 5 business day</strong> timeline as a first exam. Any vaccination doses you already
-         completed and documented do not disappear &mdash; bring the records.</p>
+         completed and documented do not disappear, so bring the records.</p>
 
       <h2>A note on what this page is</h2>
       <p>This is general information about a form, written by a medical practice. It is not legal advice,
