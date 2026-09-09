@@ -966,7 +966,6 @@ svg.arcs {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-image: url('mosaic-worktop.jpg');
   background-repeat: no-repeat;
   background-size: var(--mos-w, 1200px) var(--mos-h, 720px);
   background-position: var(--mx, 0px) calc(var(--my, 0px) + var(--mos-drift, 0px));
@@ -2385,202 +2384,16 @@ footer.ftr {
        clinician in frame instead of centring on the empty middle --- */
 .hero-img picture { display: block; width: 100%; height: 100%; }
 
-/* ==========================================================================
-   S1b · YOUR VISIT — A33 layer swapper, four full-page stills, one per scroll
-   Pin length = 4 panels x 120vh. Progress is tied to the REAL pin range in JS.
-   ========================================================================== */
-
-.visit {
-  --len: 480vh;
-  height: var(--len);
-  position: relative;
-  overflow-x: clip;           /* never `hidden` — it would kill the sticky stage */
-  background: var(--void-3);  /* matches the image ground so each still blends */
-}
-.visit-stage {
-  position: sticky;
-  top: 0;
-  height: 100svh;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-/* --- the arena: four stills stacked, only one visible --- */
-.visit-arena { position: absolute; inset: 0; z-index: 0; }
-.visit-shot {
-  position: absolute;
-  inset: 0;
-  margin: 0;
-  opacity: 0;
-  transform: scale(1.055);
-  transition: opacity .52s linear, transform .68s var(--ease-scroll);
-  will-change: opacity, transform;
-}
-.visit-shot picture, .visit-shot img { display: block; width: 100%; height: 100%; }
-.visit-shot img { object-fit: cover; object-position: 50% 52%; }
-.visit-shot.is-active { opacity: 1; transform: scale(1); }
-/* panels already passed drop back rather than forward, so direction reads */
-.visit-shot.is-past { transform: scale(.955); }
-
-/* --- scrim: the type must stay legible over every one of the four --- */
-.visit-scrim {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(90deg, rgba(251,250,247,.95) 0%, rgba(251,250,247,.78) 34%,
-                           rgba(251,250,247,.16) 62%, rgba(251,250,247,0) 84%),
-    linear-gradient(0deg, rgba(251,250,247,.55) 0%, rgba(251,250,247,0) 42%);
-}
-
-/* --- the caption block --- */
-.visit-copy {
-  position: absolute;
-  z-index: 2;
-  left: var(--gutter);
-  top: 50%;
-  translate: 0 -50%;
-  width: min(calc(560 * var(--h)), 46vw);
-}
-.visit-cap {
-  position: absolute;
-  inset: auto auto auto 0;
-  bottom: 0;
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity .42s linear, transform .62s var(--ease-scroll);
-  pointer-events: none;
-}
-.visit-cap.is-active { position: relative; opacity: 1; transform: translateY(0); pointer-events: auto; }
-.visit-cap.is-past { transform: translateY(-22px); }
-
-.visit-eyebrow {
-  font-family: 'Inter', sans-serif;
-  font-size: calc(12 * var(--h));
-  font-weight: 600;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: calc(18 * var(--h));
-}
-.visit-n {
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-size: calc(20 * var(--h));
-  font-weight: 400;
-  letter-spacing: 0;
-  color: var(--accent-2);
-}
-.visit-head {
-  font-family: 'Manrope', sans-serif;
-  font-size: calc(58 * var(--h));
-  font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -.025em;
-  color: var(--ink);
-  text-wrap: balance;
-  margin-bottom: calc(20 * var(--h));
-}
-.visit-body {
-  font-family: 'Inter', sans-serif;
-  font-size: calc(18.5 * var(--h));
-  line-height: 1.6;
-  color: var(--muted);
-  max-width: calc(470 * var(--h));
-}
-
-/* --- step dots --- */
-.visit-dots {
-  position: absolute;
-  z-index: 3;
-  left: var(--gutter);
-  bottom: calc(56 * var(--u));
-  display: flex;
-  gap: calc(9 * var(--h));
-}
-.visit-dot {
-  width: 30px; height: 3px;
-  border: 0; padding: 0;
-  border-radius: 3px;
-  background: rgba(20,18,16,.20);
-  cursor: pointer;
-  transition: background .3s var(--ease-scroll), width .3s var(--ease-scroll);
-}
-.visit-dot.is-active { background: var(--accent); width: 52px; }
-.visit-dot:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-
-/* --- progress rail along the bottom of the stage --- */
-.visit-rail {
-  position: absolute;
-  z-index: 3;
-  left: 0; right: 0; bottom: 0;
-  height: 2px;
-  background: var(--line-2);
-}
-.visit-rail i {
-  display: block;
-  height: 100%;
-  width: calc(var(--visit-p, 0) * 100%);
-  background: var(--accent);
-}
-
 /* --- tablet --- */
 @media (max-width: 1100px) {
-  .visit-head { font-size: calc(46 * var(--h)); }
-  .visit-copy { width: min(calc(520 * var(--h)), 58vw); }
 }
 
 /* --- phone: copy sits at the bottom over a stronger bottom scrim --- */
 @media (max-aspect-ratio: 11/10), (max-width: 700px) {
-  .visit { --len: 420vh; }
-  .visit-scrim {
-    background: linear-gradient(0deg, rgba(251,250,247,.97) 0%, rgba(251,250,247,.88) 34%,
-                                      rgba(251,250,247,.30) 60%, rgba(251,250,247,0) 88%);
-  }
-  .visit-copy {
-    left: var(--gutter);
-    right: var(--gutter);
-    top: auto;
-    bottom: calc(112 * var(--u));
-    translate: none;
-    width: auto;
-  }
-  .visit-head { font-size: calc(38 * var(--h)); }
-  .visit-body { font-size: calc(16.5 * var(--h)); max-width: none; }
-  .visit-dots { bottom: calc(64 * var(--u)); }
-  .visit-shot img { object-position: 52% 50%; }
 }
 
 /* --- reduced motion: unpin entirely, show all four stacked and readable --- */
 @media (prefers-reduced-motion: reduce) {
-  .visit { height: auto; --len: auto; }
-  .visit-stage { position: static; height: auto; }
-  .visit-arena { position: static; }
-  /* A33: show ONE representative still, no swap */
-  .visit-shot { display: none; }
-  .visit-shot[data-i="0"] {
-    display: block;
-    position: relative;
-    opacity: 1;
-    transform: none;
-    transition: none;
-    aspect-ratio: 16 / 9;
-  }
-  .visit-scrim { display: none; }
-  .visit-copy {
-    position: static;
-    translate: none;
-    width: auto;
-    padding: calc(30 * var(--u)) var(--gutter) calc(60 * var(--u));
-  }
-  .visit-cap {
-    position: relative;
-    opacity: 1;
-    transform: none;
-    transition: none;
-    margin-bottom: calc(40 * var(--u));
-    pointer-events: auto;
-  }
-  .visit-dots, .visit-rail { display: none; }
 }
 
 /* --- hero slow-motion plate (video.md V1) ---------------------------------
@@ -2700,7 +2513,6 @@ footer.ftr {
    across the six windows and fought the copy. The defocused corridor has no
    hard focal point, so every crop reads as a calm image on its own.
    ========================================================================== */
-.mos-card .mos-img { background-image: url('ambient-clinic-poster.webp'); }
 
 /* the softer sheet needs less scrim to stay legible, so let more of it show */
 .mos-card::before {
@@ -2776,7 +2588,6 @@ footer.ftr {
    The sheet now holds 4.00:1 even with NO scrim, so the scrim is only there to
    lift the copy further rather than to rescue it.
    ========================================================================== */
-.mos-card .mos-img { background-image: url('mosaic-sheet.webp'); }
 
 .mos-card::before {
   background: linear-gradient(0deg,
@@ -2908,7 +2719,6 @@ footer.ftr {
 .why .act p,
 .note p,
 .hpanel p,
-.visit-body,
 .vax-detail p,
 .ans p,
 .band p,
@@ -2921,8 +2731,7 @@ footer.ftr {
 }
 
 @media (max-width: 760px) {
-  .sec-lead, .doc-txt > p, .why .act p, .note p, .hpanel p, .visit-body,
-  .vax-detail p, .ans p, .band p, .preview-item .nt, .ftr-brand-col p,
+  .sec-lead, .doc-txt > p, .why .act p, .note p, .hpanel p, .vax-detail p, .ans p, .band p, .preview-item .nt, .ftr-brand-col p,
   .mos-card p {
     text-align: left;
     hyphens: manual;
@@ -3018,62 +2827,7 @@ footer.ftr {
    text. --accent-deep takes it to 5.7:1 without changing the look. */
 .hero .eyebrow { color: var(--accent-deep); }
 
-/* ==========================================================================
-   S1b VISIT — unpin on mobile
-   Measured at a true 390px viewport: the rig was 3545px tall with an 844px
-   sticky stage, i.e. 4.2 screens where the page appears frozen while stills
-   cross-fade. On touch that reads as broken scrolling. Here it becomes four
-   ordinary stacked cards — image then its own caption — which scrolls
-   natively. JS moves each caption inside its figure and sets .is-stacked.
-   Desktop is untouched: every rule below is inside the mobile query.
-   ========================================================================== */
 @media (max-width: 900px), (max-aspect-ratio: 11/10) {
-  .visit { height: auto !important; --len: auto; }
-  .visit-stage {
-    position: static !important;
-    height: auto !important;
-    overflow: visible;
-    padding-block: calc(30 * var(--u));
-  }
-  .visit-arena { position: static; display: block; padding-inline: var(--gutter); }
-  .visit-scrim, .visit-dots, .visit-rail { display: none; }
-  .visit-copy { position: static; translate: none; width: auto; inset: auto; }
-
-  .visit.is-stacked .visit-copy { display: none; }   /* emptied by the reparent */
-
-  .visit.is-stacked .visit-shot {
-    display: block;
-    position: relative;
-    inset: auto;
-    opacity: 1;
-    transform: none;
-    transition: none;
-    margin: 0 0 calc(44 * var(--u));
-  }
-  .visit.is-stacked .visit-shot:last-of-type { margin-bottom: 0; }
-  .visit.is-stacked .visit-shot picture {
-    display: block;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-  }
-  .visit.is-stacked .visit-shot img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-  }
-  .visit.is-stacked .visit-cap {
-    position: static;
-    inset: auto;
-    opacity: 1;
-    transform: none;
-    transition: none;
-    pointer-events: auto;
-    margin-top: calc(20 * var(--u));
-  }
-  .visit.is-stacked .visit-head { font-size: calc(30 * var(--h)); margin-bottom: calc(12 * var(--h)); }
-  .visit.is-stacked .visit-body { font-size: calc(16 * var(--h)); max-width: none; }
 }
 
 /* ==========================================================================
@@ -3263,12 +3017,10 @@ footer.ftr {
   /* --- 2 · headings sized for a 390px column --- */
   .sec-title { font-size: calc(31 * var(--h)); line-height: 1.12; }
   .doc-name  { font-size: calc(34 * var(--h)); }
-  .visit-head { font-size: calc(27 * var(--h)); }
   .faq summary { font-size: calc(18 * var(--h)); }
 
   /* --- 3 · body copy floor --- */
   .mos-card p,
-  .visit-body,
   .ans p,
   .creds li,
   .band p,
@@ -3283,7 +3035,6 @@ footer.ftr {
 
   /* --- 4 · tap targets --- */
   .modal-close-btn { width: 44px; height: 44px; }
-  .visit-dot { padding-block: 14px; background-clip: content-box; }
 }
 
 /* Those four blocks carried hardcoded 14px inline styles, which beat every
@@ -3296,7 +3047,7 @@ footer.ftr {
 @media (max-width: 900px) {
   /* --h resolves to 0.97 on a phone, so calc(16 * --h) lands at 15.5px.
      These use absolute px to actually reach the 16px reading floor. */
-  .mos-card p, .visit-body, .ans p, .creds li, .band p,
+  .mos-card p, .ans p, .creds li, .band p,
   .sub-note, .reassurance-row, .chk .nt, .ftr-contact-p,
   .talk-note, .band-hours, .band-call, .band-contact,
   .quote-name, .quote-place, .band-area-item { font-size: 16px; }
@@ -3313,7 +3064,76 @@ footer.ftr {
 
 @media (max-width: 900px) {
   /* .visit.is-stacked .visit-body is 0,3,0 and was out-ranking the floor */
-  .visit.is-stacked .visit-body,
   .band-note,
   .band-lead { font-size: 16px; }
+}
+
+/* ==========================================================================
+   S5 "What's Included" — the copy comes first now
+   The six windows shared one photograph behind the text, which is what buried
+   the content. The cards are plain now: white ground, hairline border, an
+   accent rule across the top, and the icon and copy at full contrast. This is
+   the fallback the build always carried for the no-photograph case; it is now
+   the default, because the section exists to be read.
+   ========================================================================== */
+.mos-card .mos-img { display: none; }
+.mos-card::before  { display: none; }
+
+.mos-card {
+  background: var(--void-2);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  padding: calc(30 * var(--h));
+  justify-content: flex-start;
+  overflow: hidden;
+  position: relative;
+}
+.mos-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--accent);
+}
+.mos-card h3 {
+  margin-top: calc(16 * var(--h));
+  margin-bottom: calc(10 * var(--h));
+  color: var(--ink);
+}
+.mos-card p { color: var(--muted); }
+.mos-card .ico { color: var(--accent); }
+
+/* ==========================================================================
+   S7 PROCESS — heading above the track, not on top of it
+   The pinned head was position:absolute at top-left with a 540px max-width,
+   while the track starts at 12vw (181px at 1512), so the cards overlapped the
+   heading and lede. The head now sits in normal flow at the top of the sticky
+   stage and the track follows beneath it.
+   ========================================================================== */
+@media (min-width: 901px) {
+  .stage {
+    justify-content: flex-start;
+    /* clears the sticky header (topbar + hdr is ~106px at this scale), since
+       the header is z-50 and the stage is z-5 */
+    padding-top: calc(142 * var(--u));
+    padding-bottom: calc(40 * var(--u));
+  }
+  .process-pinned-head {
+    position: static;
+    max-width: calc(660 * var(--h));
+    margin: 0 var(--gutter) calc(34 * var(--u));
+    z-index: 5;
+  }
+  /* centre the cards in whatever height is left under the heading */
+  .track { align-items: stretch; margin-block: auto; }
+}
+
+/* the process heading needs the page gutter once the stage is unpinned */
+@media (max-width: 900px) {
+  .process-pinned-head {
+    padding-inline: var(--gutter);
+    margin-bottom: calc(26 * var(--u));
+  }
+  .stage { padding-top: calc(30 * var(--u)); }
 }

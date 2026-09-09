@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="assets/core.css">
 
   <!-- Three.js ES Module Importmap -->
-  <link rel="preload" as="image" fetchpriority="high" href="assets/hero-consult-poster.webp">
+  <link rel="preload" as="image" fetchpriority="high" href="assets/hero-real-poster.webp">
   <script type="importmap">
   {
     "imports": {
@@ -373,81 +373,73 @@
 
       <!-- Right Bleed Image Column -->
       <div class="hero-img appear appear--scale" style="--d:.20s">
-        <img class="hero-poster" src="assets/hero-consult-poster.webp" width="1280" height="720"
+        <img class="hero-poster" src="assets/hero-real-poster.webp" width="1280" height="720"
              fetchpriority="high" decoding="async"
-             alt="A civil surgeon reviewing an applicant's immigration medical exam with a patient at the NY MedCare office in Manhattan">
+             alt="Dr. Huma Irshad going through a Form I-693 with a patient in the examination room at NY MedCare in Manhattan">
         <video class="hero-plate" muted loop playsinline preload="metadata" tabindex="-1"
-               poster="assets/hero-consult-poster.webp" aria-hidden="true"
-               data-src="assets/hero-consult.mp4"></video>
+               poster="assets/hero-real-poster.webp" aria-hidden="true"
+               data-src="assets/hero-real.mp4"></video>
       </div>
 
     </section>
 
-    <!-- S1b · Your Visit: A33 layer swapper — four full-page stills, one per scroll -->
-    <section class="rig visit" id="visit" aria-label="What your visit looks like">
-      <div class="visit-stage">
-
-        <div class="visit-arena" aria-hidden="true">
-        <figure class="visit-shot is-active" data-i="0">
-          <picture>
-            <source srcset="assets/visit-1-exterior.webp" type="image/webp">
-            <img src="assets/visit-1-exterior.jpg" width="1376" height="768" fetchpriority="high" decoding="async" alt="The discreet street entrance of the NY MedCare office in Manhattan">
-          </picture>
-        </figure>
-        <figure class="visit-shot" data-i="1">
-          <picture>
-            <source srcset="assets/visit-2-reception.webp" type="image/webp">
-            <img src="assets/visit-2-reception.jpg" width="1376" height="768" loading="lazy" decoding="async" alt="The quiet reception and waiting area at NY MedCare">
-          </picture>
-        </figure>
-        <figure class="visit-shot" data-i="2">
-          <picture>
-            <source srcset="assets/visit-3-exam-room.webp" type="image/webp">
-            <img src="assets/visit-3-exam-room.jpg" width="1376" height="768" loading="lazy" decoding="async" alt="A prepared examination room at NY MedCare">
-          </picture>
-        </figure>
-        <figure class="visit-shot" data-i="3">
-          <picture>
-            <source srcset="assets/visit-4-sealed.webp" type="image/webp">
-            <img src="assets/visit-4-sealed.jpg" width="1376" height="768" loading="lazy" decoding="async" alt="A completed Form I-693 sealed in its envelope on the civil surgeon's desk">
-          </picture>
-        </figure>
-        </div>
-        <div class="visit-scrim" aria-hidden="true"></div>
-
-        <div class="visit-copy" aria-live="polite">
-        <div class="visit-cap is-active" data-i="0">
-          <p class="visit-eyebrow"><span class="visit-n">01</span> · Arrive</p>
-          <h2 class="visit-head">One address, one appointment</h2>
-          <p class="visit-body">Same-week appointments are usually available, minutes from several subway lines.</p>
-        </div>
-        <div class="visit-cap" data-i="1">
-          <p class="visit-eyebrow"><span class="visit-n">02</span> · Check in</p>
-          <h2 class="visit-head">No referral, no existing patient file</h2>
-          <p class="visit-body">Bring your photo ID, your vaccination records and your printed Form I-693 with Part 1 completed.</p>
-        </div>
-        <div class="visit-cap" data-i="2">
-          <p class="visit-eyebrow"><span class="visit-n">03</span> · Your exam</p>
-          <h2 class="visit-head">About an hour with Dr. Irshad</h2>
-          <p class="visit-body">The physical examination, your vaccination history reviewed, and every lab order and prescription written the same day.</p>
-        </div>
-        <div class="visit-cap" data-i="3">
-          <p class="visit-eyebrow"><span class="visit-n">04</span> · Sealed</p>
-          <h2 class="visit-head">Signed, sealed and ready to file</h2>
-          <p class="visit-body">Results reach us in 3 to 5 business days. You collect your sealed envelope, plus an unsealed copy to keep.</p>
-        </div>
+    <!-- S7 · The Process: Horizontal Pinned Scroll Rig -->
+    <section class="rig" id="process">
+      <div class="stage">
+        <div class="process-pinned-head">
+          <span class="eyebrow">The Process</span>
+          <h2 class="sec-title" style="font-size: calc(38 * var(--h));">Five steps from booking to sealed envelope</h2>
+          <p class="sec-lead" style="font-size: calc(17 * var(--h));">No guessing, no runaround. Here is exactly how your immigration medical exam works with us, from booking to sealed envelope.</p>
         </div>
 
-        <div class="visit-dots" role="tablist" aria-label="Visit steps">
-          <button type="button" class="visit-dot is-active" data-i="0" aria-label="Step 01 — Arrive"></button>
-          <button type="button" class="visit-dot" data-i="1" aria-label="Step 02 — Check in"></button>
-          <button type="button" class="visit-dot" data-i="2" aria-label="Step 03 — Your exam"></button>
-          <button type="button" class="visit-dot" data-i="3" aria-label="Step 04 — Sealed"></button>
+        <div class="track">
+          <!-- Step 1 -->
+          <article class="hpanel is-lit">
+            <div class="n">01</div>
+            <h3>Book Your Slot</h3>
+            <p>Pick a time on the calendar below or call us. Same-week appointments are usually available.</p>
+            <div class="when">2 minutes</div>
+          </article>
+
+          <!-- Step 2 -->
+          <article class="hpanel">
+            <div class="n">02</div>
+            <h3>Gather Documents</h3>
+            <p>Photo ID, vaccination records and your printed Form I-693 with Part 1 filled in. Full checklist below.</p>
+            <div class="when">Before visit</div>
+          </article>
+
+          <!-- Step 3 -->
+          <article class="hpanel">
+            <div class="n">03</div>
+            <h3>Complete the Exam</h3>
+            <p>Physical exam and history review with Dr. Irshad, who writes every lab order and vaccine prescription you need.</p>
+            <div class="when">About an hour</div>
+          </article>
+
+          <!-- Step 4 -->
+          <article class="hpanel">
+            <div class="n">04</div>
+            <h3>Complete Your Orders</h3>
+            <p>Take your lab order to the collection site and any prescriptions to your pharmacy. We tell you exactly where to go.</p>
+            <div class="when">Your schedule</div>
+          </article>
+
+          <!-- Step 5 -->
+          <article class="hpanel">
+            <div class="n">05</div>
+            <h3>Collect & File</h3>
+            <p>Results reach us in 3–5 business days. We call you, then hand over your sealed envelope plus a copy to keep.</p>
+            <div class="when">3–5 business days</div>
+          </article>
         </div>
 
-        <div class="visit-rail" aria-hidden="true"><i></i></div>
+        <div class="rail-progress-bar">
+          <div class="rail-progress-inner"></div>
+        </div>
       </div>
     </section>
+
 
     <!-- S2 · Credential Ribbon: Velocity Marquee -->
     <section class="ribbon" id="ribbon" aria-label="Practice Highlights">
@@ -671,62 +663,6 @@
       </div>
     </aside>
 
-    <!-- S7 · The Process: Horizontal Pinned Scroll Rig -->
-    <section class="rig" id="process">
-      <div class="stage">
-        <div class="process-pinned-head">
-          <span class="eyebrow">The Process</span>
-          <h2 class="sec-title" style="font-size: calc(38 * var(--h));">Five steps from booking to sealed envelope</h2>
-          <p class="sec-lead" style="font-size: calc(17 * var(--h));">No guessing, no runaround. Here is exactly how your immigration medical exam works with us, from booking to sealed envelope.</p>
-        </div>
-
-        <div class="track">
-          <!-- Step 1 -->
-          <article class="hpanel is-lit">
-            <div class="n">01</div>
-            <h3>Book Your Slot</h3>
-            <p>Pick a time on the calendar below or call us. Same-week appointments are usually available.</p>
-            <div class="when">2 minutes</div>
-          </article>
-
-          <!-- Step 2 -->
-          <article class="hpanel">
-            <div class="n">02</div>
-            <h3>Gather Documents</h3>
-            <p>Photo ID, vaccination records and your printed Form I-693 with Part 1 filled in. Full checklist below.</p>
-            <div class="when">Before visit</div>
-          </article>
-
-          <!-- Step 3 -->
-          <article class="hpanel">
-            <div class="n">03</div>
-            <h3>Complete the Exam</h3>
-            <p>Physical exam and history review with Dr. Irshad, who writes every lab order and vaccine prescription you need.</p>
-            <div class="when">About an hour</div>
-          </article>
-
-          <!-- Step 4 -->
-          <article class="hpanel">
-            <div class="n">04</div>
-            <h3>Complete Your Orders</h3>
-            <p>Take your lab order to the collection site and any prescriptions to your pharmacy. We tell you exactly where to go.</p>
-            <div class="when">Your schedule</div>
-          </article>
-
-          <!-- Step 5 -->
-          <article class="hpanel">
-            <div class="n">05</div>
-            <h3>Collect & File</h3>
-            <p>Results reach us in 3–5 business days. We call you, then hand over your sealed envelope plus a copy to keep.</p>
-            <div class="when">3–5 business days</div>
-          </article>
-        </div>
-
-        <div class="rail-progress-bar">
-          <div class="rail-progress-inner"></div>
-        </div>
-      </div>
-    </section>
 
     <!-- S8 · What to Bring: Trigger Card + A27 Overlay -->
     <section class="bring-trigger-sec" id="bring">
@@ -1289,98 +1225,6 @@
   })();
   </script>
 
-  <!-- Your Visit: A33 swap driven by the real pin range -->
-  <script>
-  (function () {
-    var rig = document.getElementById('visit');
-    if (!rig) return;
-    var shots = [].slice.call(rig.querySelectorAll('.visit-shot'));
-    var caps  = [].slice.call(rig.querySelectorAll('.visit-cap'));
-    var dots  = [].slice.call(rig.querySelectorAll('.visit-dot'));
-    var N = shots.length;
-    var reduce = matchMedia('(prefers-reduced-motion: reduce)');
-    var active = 0, pinTop = 0, pinLen = 1, raf = 0;
-
-    function measure() {
-      pinTop = rig.offsetTop;
-      pinLen = Math.max(1, rig.offsetHeight - innerHeight);  /* the REAL pin range */
-    }
-
-    function paint(i) {
-      for (var k = 0; k < N; k++) {
-        var isOn = k === i, isPast = k < i;
-        shots[k].classList.toggle('is-active', isOn);
-        shots[k].classList.toggle('is-past', isPast);
-        caps[k].classList.toggle('is-active', isOn);
-        caps[k].classList.toggle('is-past', isPast);
-        dots[k].classList.toggle('is-active', isOn);
-        dots[k].setAttribute('aria-selected', isOn ? 'true' : 'false');
-      }
-    }
-
-    function frame() {
-      raf = 0;
-      var p = (scrollY - pinTop) / pinLen;
-      p = p < 0 ? 0 : p > 1 ? 1 : p;
-      rig.style.setProperty('--visit-p', p.toFixed(4));
-      var i = Math.floor(p * N * 0.999);
-      if (i > N - 1) i = N - 1;
-      if (i !== active) { active = i; paint(i); }   /* guard: swap on change, not per pixel */
-    }
-
-    function onScroll() { if (!raf) raf = requestAnimationFrame(frame); }
-
-    dots.forEach(function (d, i) {
-      d.addEventListener('click', function () {
-        scrollTo({ top: pinTop + (i + 0.5) / N * pinLen,
-                   behavior: reduce.matches ? 'auto' : 'smooth' });
-      });
-    });
-
-    /* On phones and tablets the pinned stage becomes four ordinary stacked
-       cards. Each caption is moved inside its own figure so image and text
-       stay together; unstack() puts them back if the viewport grows, so no
-       reload is needed when a desktop window is resized across the breakpoint. */
-    var stackMQ = matchMedia('(max-width: 900px), (max-aspect-ratio: 11/10)');
-    var copyBox = rig.querySelector('.visit-copy');
-    var stacked = false;
-
-    function stack() {
-      if (stacked) return;
-      for (var i = 0; i < N; i++) shots[i].appendChild(caps[i]);
-      rig.classList.add('is-stacked');
-      removeEventListener('scroll', onScroll);
-      stacked = true;
-    }
-    function unstack() {
-      if (!stacked) return;
-      for (var i = 0; i < N; i++) copyBox.appendChild(caps[i]);
-      rig.classList.remove('is-stacked');
-      stacked = false;
-      measure(); frame();
-      addEventListener('scroll', onScroll, { passive: true });
-    }
-
-    function start() {
-      if (stackMQ.matches) { stack(); return; }
-      if (reduce.matches) { paint(0); return; }
-      measure(); frame();
-      addEventListener('scroll', onScroll, { passive: true });
-    }
-    stackMQ.addEventListener('change', function () {
-      if (stackMQ.matches) stack();
-      else if (!reduce.matches) unstack();
-    });
-    var t;
-    addEventListener('resize', function () {
-      clearTimeout(t);
-      t = setTimeout(function () { measure(); frame(); }, 150);
-    });
-    addEventListener('load', function () { measure(); frame(); });
-    reduce.addEventListener('change', function () { location.reload(); });
-    start();
-  })();
-  </script>
 
   <!-- Mosaic: measure each window's offset into the shared photograph -->
   <script>
