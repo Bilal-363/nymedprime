@@ -3284,3 +3284,21 @@ footer.ftr {
   .stat-num { font-size: calc(58 * var(--h)); }
   .stat-lbl { font-size: 13px; letter-spacing: 0.14em; }
 }
+
+/* ==========================================================================
+   BOOKING REMOVED — the practice takes appointments by phone
+   The booking section and its calendar embed are gone, so every CTA is now a
+   phone call. The sticky mobile bar carries one full-width Call button rather
+   than a Call/Book pair.
+   ========================================================================== */
+.mcta-single {
+  flex: 1 1 100%;
+  justify-content: center;
+  text-align: center;
+  min-height: 48px;
+}
+
+/* rules that only served the removed booking section, kept inert on purpose
+   rather than deleted, so nothing else that referenced them can break:
+   .book, .book-media, .book-pane, .ghl-container, .reassurance-list,
+   .reassurance-row, .talk-note, .status-pill */

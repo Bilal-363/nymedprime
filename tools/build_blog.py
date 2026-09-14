@@ -140,7 +140,7 @@ def head(title, desc, canon, depth, kw=None, ld_blocks=(), og_type="article"):
           <a class="nav-link" href="/#faq">FAQ</a>
         </nav>
         <a class="ghost" href="tel:{TEL}">{PHONE}</a>
-        <a class="pill" href="/#book">Book Your Exam</a>
+        <a class="pill" href="tel:+19179058140">Call (917) 905-8140</a>
       </div>
     </div>
   </header>
@@ -169,7 +169,7 @@ def footer(depth):
         <h4>Practice</h4>
         <a href="/#doctor">About Dr. Irshad</a>
         <a href="/#location">Location &amp; Hours</a>
-        <a href="/#book">Book an Appointment</a>
+        <a href="/#serve-location">Location &amp; Hours</a>
         <a href="/privacy-policy/">Privacy Policy</a>
         <a href="/terms/">Terms of Use</a>
       </div>

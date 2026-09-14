@@ -470,22 +470,8 @@ document.addEventListener('DOMContentLoaded', () => {
   updateLiveStatus();
   setInterval(updateLiveStatus, 60000);
 
-  // GoHighLevel Widget & S10 video defer
-  window.addEventListener('load', () => {
-    const bookVideo = document.querySelector('.book-media video');
-    if (bookVideo && !isReducedMotion) {
-      const source = bookVideo.querySelector('source[data-src]');
-      if (source && !source.src) {
-        source.src = source.dataset.src;
-        bookVideo.load();
-        bookVideo.play().catch(() => {});
-      }
-    }
-
-    // The calendar embed is sized by link.msgsndr.com/js/embed.js, attached
-    // from the page. The old widgets loader.js was for the previous bare
-    // widget URL and is no longer needed.
-  });
+  // The booking section and its calendar embed were removed; the practice
+  // takes appointments by phone. Nothing to defer on load any more.
 });
 
 function debounce(fn, delay) {

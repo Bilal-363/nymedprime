@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 CTA = """
       <aside class="post-cta">
-        <p class="post-cta-eyebrow">Book your exam</p>
+        <p class="post-cta-eyebrow">Speak to the practice</p>
         <h2>One appointment with a USCIS-designated civil surgeon</h2>
         <p>Dr. Huma Irshad performs every immigration medical examination personally at our Manhattan
            office. We write every lab and vaccine order USCIS requires at the same visit.</p>
         <div class="post-cta-actions">
-          <a class="pill" href="/#book">Book Your Exam Online</a>
-          <a class="ghost" href="tel:+19179058140">Call (917) 905-8140</a>
+          <a class="pill" href="tel:+19179058140">Call (917) 905-8140</a>
+          <a class="ghost" href="/#serve-location">Location &amp; hours</a>
         </div>
       </aside>
 """
